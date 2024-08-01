@@ -1,0 +1,45 @@
+<!-- <app-loader *ngIf="isLoading"></app-loader> -->
+<div>
+    <tui-loader
+        [showLoader]="isLoading"
+        size="xl"
+        [inheritColor]="true"
+        class="" />
+</div>
+<form
+    [formGroup]="loginForm"
+    *ngIf="!isLoading"
+    (ngSubmit)="onFormSubmit()"
+    class="login-form">
+    <label class="login-form-label">Log in</label>
+    <label class="error-message">{{ errorMessage }}</label>
+
+    <input
+        class="login-form-input"
+        placeholder="Username"
+        formControlName="username" />
+    <label
+        *ngIf="
+            loginForm.controls['username'].invalid &&
+            loginForm.controls['username'].touched
+        "
+        class="error-message"
+        >Error</label
+    >
+
+    <input
+        class="login-form-input"
+        placeholder="Password"
+        formControlName="password"
+        type="password" />
+    <label
+        *ngIf="
+            loginForm.controls['password'].invalid &&
+            loginForm.controls['password'].touched
+        "
+        class="error-message"
+        >Error</label
+    >
+
+    <button class="login-button" type="submit">Log in</button>
+</form>
