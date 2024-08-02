@@ -1,7 +1,21 @@
-<p>menu-page works!</p>
-<div>
-    <div>Start</div>
-    <div>Achivements</div>
-    <div [routerLink]="['/routePath']" routerLinkActive="router-link-active" >Settings</div>
-    <div>Logout</div>
+<label class="game-title">Master Chef : Culinary Quiz</label>
+<div class="menu-buttons">
+    <button
+        [routerLink]="['/settings']"
+        class="menu-button">
+        Start
+    </button>
+    <button class="menu-button">
+        Achivements
+    </button>
+    <button
+        [routerLink]="['/settings']"
+        class="menu-button">
+        Settings
+    </button>
+    <button
+        (click)="onLogoutClick()"
+        class="menu-button">
+        Logout
+    </button>
 </div>

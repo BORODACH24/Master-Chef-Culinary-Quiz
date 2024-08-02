@@ -11,11 +11,12 @@ import { BackendService } from "../../services/backend.service";
 import { CookieService } from "ngx-cookie-service";
 import { CommonModule } from "@angular/common";
 import { TuiLoaderModule } from "@taiga-ui/core";
+import { TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
 
 @Component({
     selector: "app-login-page",
     standalone: true,
-    imports: [ReactiveFormsModule, CommonModule, TuiLoaderModule],
+    imports: [ReactiveFormsModule, CommonModule, TuiLoaderModule, TuiInputModule, TuiInputPasswordModule],
     templateUrl: "./login-page.component.html",
     styleUrl: "./login-page.component.scss",
 })
@@ -40,7 +41,7 @@ export class LoginPageComponent {
     constructor(private router: Router) {}
 
     ngOnInit(): void {
-        this.router.navigateByUrl("main");
+        // this.router.navigateByUrl("main");
     }
 
     public onFormSubmit() {
@@ -60,10 +61,10 @@ export class LoginPageComponent {
                     this.auth.user = data;
                     this.cookies.set("token", data.token);
                     this.cookies.set("refreshToken", data.refreshToken);
-                    // this.router.navigateByUrl("main");
+                    this.router.navigateByUrl("main");
                 },
                 error: ({ error }) => {
-                    // this.isLoading = false;
+                    this.isLoading = false;
                     console.log(error.message);
                     this.errorMessage = error.message;
                 },

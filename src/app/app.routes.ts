@@ -4,9 +4,11 @@ import { MainPageComponent } from "./pages/main-page/main-page.component";
 import { SettingsPageComponent } from "./pages/settings-page/settings-page.component";
 import { authGuard } from "./guards/auth.guard";
 import { MenuPageComponent } from "./pages/menu-page/menu-page.component";
+import { RegisterPageComponent } from "./pages/register-page/register-page.component";
 
 export const routes: Routes = [
-    { path: "", component: LoginPageComponent },
+    { path: "login", component: LoginPageComponent },
+    { path: "register", component: RegisterPageComponent },
     {
         path: "main",
         component: MainPageComponent,
@@ -16,4 +18,5 @@ export const routes: Routes = [
             { path: "settings", component: SettingsPageComponent },
         ],
     },
+    { path: "**", redirectTo: "login" },
 ];

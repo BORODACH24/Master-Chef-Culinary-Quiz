@@ -1,0 +1,43 @@
+<!-- <app-loader *ngIf="isLoading"></app-loader> -->
+<div class="background">
+    <div>
+        <tui-loader
+            [showLoader]="isLoading"
+            size="xl"
+            [inheritColor]="true"
+            class="" />
+    </div>
+    <form
+        [formGroup]="registerForm"
+        *ngIf="!isLoading"
+        (ngSubmit)="onFormSubmit()"
+        class="login-form">
+        <label class="login-form-label">Registration</label>
+
+        <tui-input formControlName="username" class="login-form-input">
+            Type username
+            <input tuiTextfield />
+        </tui-input>
+        <tui-error [error]="usernameError"></tui-error>
+
+        <tui-input formControlName="email" class="login-form-input">
+            Type email
+            <input tuiTextfield type="email"/>
+        </tui-input>
+        <tui-error [error]="emailError"></tui-error>
+
+        <tui-input-password formControlName="password" class="login-form-input">
+            Type password
+            <input tuiTextfield/>
+        </tui-input-password>
+        <tui-error [error]="passwordError"></tui-error>
+
+        <tui-input-password formControlName="passwordConfirm" class="login-form-input">
+            Confirm password
+            <input tuiTextfield/>
+        </tui-input-password>
+        <tui-error [error]="formError"></tui-error>
+        <button class="login-button" type="submit">Sign up</button>
+    </form>
+</div>
+
