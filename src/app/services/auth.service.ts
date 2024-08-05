@@ -25,9 +25,16 @@ export class AuthService {
         return !!this.token;
     }
 
-    public login(username: string | null, password: string) {
+    public login(username: string, password: string) {
         return this.http.post<User>("https://dummyjson.com/auth/login", {
             username,
+            password,
+        });
+    }
+    public register(username: string, email: string, password: string) {
+        return this.http.post<User>("https://dummyjson.com/users/add", {
+            username,
+            email,
             password,
         });
     }

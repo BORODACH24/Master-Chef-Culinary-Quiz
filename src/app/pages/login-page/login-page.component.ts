@@ -6,17 +6,27 @@ import {
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 import { BackendService } from "../../services/backend.service";
 import { CookieService } from "ngx-cookie-service";
 import { CommonModule } from "@angular/common";
-import { TuiLoaderModule } from "@taiga-ui/core";
+import { TuiErrorModule, TuiLoaderModule } from "@taiga-ui/core";
 import { TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
+import { TuiValidationError } from "@taiga-ui/cdk";
+import { getErrorMessage } from "../../validators/register.validator";
 
 @Component({
     selector: "app-login-page",
     standalone: true,
-    imports: [ReactiveFormsModule, CommonModule, TuiLoaderModule, TuiInputModule, TuiInputPasswordModule],
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        TuiLoaderModule,
+        TuiInputModule,
+        TuiInputPasswordModule,
+        RouterModule,
+        TuiErrorModule
+    ],
     templateUrl: "./login-page.component.html",
     styleUrl: "./login-page.component.scss",
 })
@@ -26,11 +36,9 @@ export class LoginPageComponent {
     public loginForm: FormGroup = new FormGroup({
         username: new FormControl<string | null>(null, [
             Validators.required,
-            Validators.minLength(1),
         ]),
         password: new FormControl<string | null>(null, [
             Validators.required,
-            Validators.minLength(1),
         ]),
     });
 
@@ -43,7 +51,22 @@ export class LoginPageComponent {
     ngOnInit(): void {
         // this.router.navigateByUrl("main");
     }
-
+    public get usernameError() {
+        return this.loginForm.controls["username"].errors &&
+            this.loginForm.controls["username"].touched
+            ? new TuiValidationError(
+                  getErrorMessage(this.loginForm.controls["username"])
+              )
+            : null;
+    }
+    public get passwordError() {
+        return this.loginForm.controls["password"].errors &&
+            this.loginForm.controls["password"].touched
+            ? new TuiValidationError(
+                  getErrorMessage(this.loginForm.controls["password"])
+              )
+            : null;
+    }
     public onFormSubmit() {
         this.isLoading = true;
         if (!this.loginForm?.valid) {

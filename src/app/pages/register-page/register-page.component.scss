@@ -8,8 +8,10 @@
 }
 .background{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 12px;
 
     height: 100dvh;
 
@@ -69,7 +71,7 @@
     border: none;
     border-radius: 12px;
 
-    margin-top: 8%;
+    margin-top: 4%;
 
     transition-duration: 0.2s;
 }

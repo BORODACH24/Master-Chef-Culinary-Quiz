@@ -1,12 +1,12 @@
 <!-- <app-loader *ngIf="isLoading"></app-loader> -->
 <div class="background">
-    <div>
+
         <tui-loader
             [showLoader]="isLoading"
             size="xl"
             [inheritColor]="true"
             class="" />
-    </div>
+
     <form
         [formGroup]="registerForm"
         *ngIf="!isLoading"
@@ -39,5 +39,6 @@
         <tui-error [error]="formError"></tui-error>
         <button class="login-button" type="submit">Sign up</button>
     </form>
+    <label *ngIf="!isLoading">Have an account? <a [routerLink]="['/login']">Login</a></label>
 </div>
 

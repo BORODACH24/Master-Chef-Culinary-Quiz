@@ -1,28 +1,34 @@
 <!-- <app-loader *ngIf="isLoading"></app-loader> -->
 <div class="background">
-    <div>
-        <tui-loader
-            [showLoader]="isLoading"
-            size="xl"
-            [inheritColor]="true"
-            class="" />
-    </div>
+    <tui-loader
+        [showLoader]="isLoading"
+        size="xl"
+        [inheritColor]="true"
+        class="" />
+
     <form
         [formGroup]="loginForm"
         *ngIf="!isLoading"
         (ngSubmit)="onFormSubmit()"
         class="login-form">
         <label class="login-form-label">Login</label>
-        <label class="error-message">{{ errorMessage }}</label>
 
         <tui-input formControlName="username" class="login-form-input">
             Type Username
             <input tuiTextfield />
         </tui-input>
+        <tui-error [error]="usernameError"></tui-error>
+
         <tui-input-password formControlName="password" class="login-form-input">
             Type Password
-            <input tuiTextfield/>
+            <input tuiTextfield />
         </tui-input-password>
+        <tui-error [error]="passwordError"></tui-error>
+
         <button class="login-button" type="submit">Log in</button>
     </form>
+    <label *ngIf="!isLoading">
+        Don't have an account?
+        <a [routerLink]="['/register']">Register</a>
+    </label>
 </div>
