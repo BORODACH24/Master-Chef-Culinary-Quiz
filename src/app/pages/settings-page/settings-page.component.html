@@ -1,1 +1,54 @@
 <p>settings-page works!</p>
+<div class="settings-plate">
+    <button
+        [routerLink]="['/main']"
+        appearance="flat"
+        tuiButton
+        type="button"
+        class="tui-space_right-3 tui-space_bottom-3">
+        Back
+    </button>
+    <form [formGroup]="settingsForm">
+        <label>Music</label>
+        <div class="volume">
+            <tui-svg src="tuiIconVolume1Large"></tui-svg>
+            <input
+                size="m"
+                tuiSlider
+                type="range"
+                min="0"
+                max="100"
+                value="60"
+                formControlName="volume" />
+            <tui-svg src="tuiIconVolume2Large"></tui-svg>
+        </div>
+        <div class="mute">
+            <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
+            <tui-toggle
+                formControlName="muted"
+                size="l"
+                [showIcons]="true"></tui-toggle>
+
+            <tui-svg src="tuiIconVolumeLarge"></tui-svg>
+        </div>
+        <div class="mute">
+            <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
+            <tui-toggle
+                formControlName="playMusic"
+                size="l"
+                [showIcons]="true"></tui-toggle>
+
+            <tui-svg src="tuiIconVolumeLarge"></tui-svg>
+        </div>
+        <label>Sound</label>
+        <div class="mute">
+            <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
+            <tui-toggle
+                formControlName="playSound"
+                size="l"
+                [showIcons]="true"></tui-toggle>
+
+            <tui-svg src="tuiIconVolumeLarge"></tui-svg>
+        </div>
+    </form>
+</div>

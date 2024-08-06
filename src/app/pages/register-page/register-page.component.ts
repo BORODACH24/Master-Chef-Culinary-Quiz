@@ -62,13 +62,13 @@ export class RegisterPageComponent {
                 Validators.required,
                 Validators.minLength(8),
                 Validators.maxLength(64),
-                Validators.pattern("(?=.*[a-z]).*"),
+                Validators.pattern(String.raw`(?=\w*[a-z])\w*`),
             ]),
             passwordConfirm: new FormControl<string>("", [
                 Validators.required,
                 Validators.minLength(8),
                 Validators.maxLength(64),
-                Validators.pattern("(?=.*[a-z]).*"),
+                Validators.pattern(String.raw`(?=\w*[a-z])\w*`),
             ]),
         },
         {
@@ -88,28 +88,14 @@ export class RegisterPageComponent {
             : null;
     }
     public get usernameError() {
-        return this.registerForm.controls["username"].errors &&
-            this.registerForm.controls["username"].touched
-            ? new TuiValidationError(
-                  getErrorMessage(this.registerForm.controls["username"])
-              )
-            : null;
+        return getErrorMessage(this.registerForm.controls["username"])
     }
     public get emailError() {
-        return this.registerForm.controls["email"].errors &&
-            this.registerForm.controls["email"].touched
-            ? new TuiValidationError(
-                  getErrorMessage(this.registerForm.controls["email"])
-              )
-            : null;
+        return getErrorMessage(this.registerForm.controls["email"])
+
     }
     public get passwordError() {
-        return this.registerForm.controls["password"].errors &&
-            this.registerForm.controls["password"].touched
-            ? new TuiValidationError(
-                  getErrorMessage(this.registerForm.controls["password"])
-              )
-            : null;
+        return getErrorMessage(this.registerForm.controls["password"])
     }
 
     public onFormSubmit() {

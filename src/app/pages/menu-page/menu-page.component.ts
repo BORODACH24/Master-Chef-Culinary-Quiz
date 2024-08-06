@@ -1,8 +1,8 @@
 import { Component, inject } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
+import { TuiButtonModule } from "@taiga-ui/core";
 import { CookieService } from "ngx-cookie-service";
 import { BackendService } from "../../services/backend.service";
-import { TuiButtonModule } from "@taiga-ui/core";
 
 @Component({
     selector: "app-menu-page",
@@ -16,7 +16,7 @@ export class MenuPageComponent {
     private router = inject(Router);
     private auth = inject(BackendService).auth;
 
-    public onLogoutClick(){
+    public onLogoutClick() {
         this.auth.token = "";
         this.cookies.delete("token");
         this.cookies.delete("refreshToken");

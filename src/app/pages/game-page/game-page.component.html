@@ -1,0 +1,19 @@
+<p>game-page works!</p>
+
+<form class="game-field" [formGroup]="form" (ngSubmit)="onSubmit()">
+    @for (item of roundQuestions; track $index) {
+        @if (item.type === 'simple') {
+            <app-simple-question-plate [question]="item" [control]="form.controls['questions'].controls[$index]"></app-simple-question-plate>
+        }
+        @if (item.type === 'multiple') {
+            <app-multiple-choice-question-plate [question]="item" [control]="form.controls['questions'].controls[$index]"></app-multiple-choice-question-plate>
+        }
+        @if (item.type === 'input') {
+            <app-multiple-choice-question-plate [question]="item" [control]="form.controls['questions'].controls[$index]"></app-multiple-choice-question-plate>
+        }
+        @if (item.type === 'drag') {
+            <app-multiple-choice-question-plate [question]="item" [control]="form.controls['questions'].controls[$index]"></app-multiple-choice-question-plate>
+        }
+    }
+    <button type="submit">Enter</button>
+</form>

@@ -5,16 +5,18 @@ import { SettingsPageComponent } from "./pages/settings-page/settings-page.compo
 import { authGuard } from "./guards/auth.guard";
 import { MenuPageComponent } from "./pages/menu-page/menu-page.component";
 import { RegisterPageComponent } from "./pages/register-page/register-page.component";
+import { GamePageComponent } from "./pages/game-page/game-page.component";
 
 export const routes: Routes = [
-    { path: "login", component: LoginPageComponent },
-    { path: "register", component: RegisterPageComponent },
+    { path: "login", component: LoginPageComponent, canActivate: [authGuard] },
+    { path: "register", component: RegisterPageComponent, canActivate: [authGuard]},
     {
         path: "main",
         component: MainPageComponent,
         canActivate: [authGuard],
         children: [
             { path: "", component: MenuPageComponent },
+            { path: "game", component: GamePageComponent },
             { path: "settings", component: SettingsPageComponent },
         ],
     },

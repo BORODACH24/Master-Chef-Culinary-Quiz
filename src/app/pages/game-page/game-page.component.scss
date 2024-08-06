@@ -1,0 +1,13 @@
+:host{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+}
+.game-field{
+    background-color: white;
+    border-radius: 24px;
+
+    padding: 24px;
+}

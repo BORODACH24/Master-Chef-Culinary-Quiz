@@ -49,7 +49,6 @@ export class LoginPageComponent {
     constructor(private router: Router) {}
 
     ngOnInit(): void {
-        // this.router.navigateByUrl("main");
     }
     public get usernameError() {
         return this.loginForm.controls["username"].errors &&

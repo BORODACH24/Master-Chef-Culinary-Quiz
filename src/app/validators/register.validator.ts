@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { TuiValidationError } from "@taiga-ui/cdk";
 
 export function registerValidator(): ValidatorFn {
     return (form: AbstractControl): ValidationErrors | null => {
@@ -8,22 +9,25 @@ export function registerValidator(): ValidatorFn {
     };
 }
 
-export function getErrorMessage(control: AbstractControl): string | undefined {
+export function getErrorMessage(control: AbstractControl): TuiValidationError | null {
+    if(!control.touched){
+        return null;
+    }
     if (control.hasError("required")) {
-        return "This field is required";
+        return new TuiValidationError("This field is required");
     }
     if (control.hasError("minlength")) {        
-        return `More than ${control.errors?.["minlength"]?.["requiredLength"]}`;
+        return new TuiValidationError(`More than ${control.errors?.["minlength"]?.["requiredLength"]}`);
     }
     if (control.hasError("maxlength")) {
-        return `Less than ${control.errors?.["maxlength"]?.["requiredLength"]}`;
+        return new TuiValidationError(`Less than ${control.errors?.["maxlength"]?.["requiredLength"]}`);
     }
     if (control.hasError("email")) {
-        return `Email error`;
+        return  new TuiValidationError(`Email error`);
     }
     if (control.hasError("pattern")) {
-        return `Pattern error`;
+        return  new TuiValidationError(`Pattern error`);
     }
-    return undefined
+    return null
 }
 

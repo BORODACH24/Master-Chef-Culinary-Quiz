@@ -1,0 +1,19 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+}
+.settings-plate {
+    background-color: white;
+    border-radius: 24px;
+
+    padding: 24px;
+}
+.volume,
+.mute {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
