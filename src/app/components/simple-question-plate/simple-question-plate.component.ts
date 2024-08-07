@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Question } from "../../interfaces/questions";
 import { CommonModule } from "@angular/common";
-import { TuiRadioLabeledModule, TuiRadioModule } from "@taiga-ui/kit";
-import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { Component, Input, OnInit } from "@angular/core";
+import {
+  FormControl,
+  ReactiveFormsModule
+} from "@angular/forms";
+import { TuiRadioLabeledModule } from "@taiga-ui/kit";
+import { Question } from "../../interfaces/questions";
 
 @Component({
     selector: "app-simple-question-plate",
@@ -12,15 +15,13 @@ import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule
     styleUrl: "./simple-question-plate.component.scss",
 })
 export class SimpleQuestionPlateComponent implements OnInit {
-    @Input() question?: Question;
-    @Input() control!: FormControl;
+    @Input() public question?: Question;
+    @Input() public control!: FormControl;
 
-    ngOnInit(): void {
-      // this.question?.answers.forEach((item)=>(this.answerForm.get("answers") as FormArray).push(new FormControl()))
-      this.control?.valueChanges
-      .subscribe((data)=>{
-        console.log(data);
-        
-      })
+    public ngOnInit(): void {
+        // this.question?.answers.forEach((item)=>(this.answerForm.get("answers") as FormArray).push(new FormControl()))
+        this.control?.valueChanges.subscribe((data) => {
+            console.log(data);
+        });
     }
 }

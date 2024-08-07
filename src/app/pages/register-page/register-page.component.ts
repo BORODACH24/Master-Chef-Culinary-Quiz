@@ -6,6 +6,7 @@ import {
     DestroyRef,
     inject,
 } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import {
     FormControl,
     FormGroup,
@@ -22,7 +23,6 @@ import {
     getErrorMessage,
     registerValidator,
 } from "../../validators/register.validator";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-register-page",
@@ -75,6 +75,20 @@ export class RegisterPageComponent {
             validators: registerValidator(),
         }
     );
+    public get formError(): TuiValidationError | null {
+        return this.registerForm.errors
+            ? new TuiValidationError("Passwords must match")
+            : null;
+    }
+    public get usernameError(): TuiValidationError | null {
+        return getErrorMessage(this.registerForm.controls["username"]);
+    }
+    public get emailError(): TuiValidationError | null {
+        return getErrorMessage(this.registerForm.controls["email"]);
+    }
+    public get passwordError(): TuiValidationError | null {
+        return getErrorMessage(this.registerForm.controls["password"]);
+    }
 
     private readonly destroy = inject(DestroyRef);
     private cookies = inject(CookieService);
@@ -82,26 +96,10 @@ export class RegisterPageComponent {
     private cdr = inject(ChangeDetectorRef);
     private router = inject(Router);
 
-    public get formError() {
-        return this.registerForm.errors
-            ? new TuiValidationError("Passwords must match")
-            : null;
-    }
-    public get usernameError() {
-        return getErrorMessage(this.registerForm.controls["username"])
-    }
-    public get emailError() {
-        return getErrorMessage(this.registerForm.controls["email"])
-
-    }
-    public get passwordError() {
-        return getErrorMessage(this.registerForm.controls["password"])
-    }
-
-    public onFormSubmit() {
+    public onFormSubmit(): void {
         if (!this.registerForm?.valid) {
             console.log("LoginForm error");
-            this.registerForm.markAllAsTouched()
+            this.registerForm.markAllAsTouched();
             return;
         }
         this.isLoading = true;
@@ -113,14 +111,17 @@ export class RegisterPageComponent {
             )
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe({
-                next: data => {
+                next: (data) => {
                     console.log("Success");
                     console.log(data);
-                    
+
                     this.auth.token = data.token ?? "default_token";
                     this.auth.user = data;
                     this.cookies.set("token", data.token ?? "default_token");
-                    this.cookies.set("refreshToken", data.refreshToken ?? "default_refresh_token");
+                    this.cookies.set(
+                        "refreshToken",
+                        data.refreshToken ?? "default_refresh_token"
+                    );
                     this.router.navigateByUrl("main");
                 },
                 error: ({ error }) => {

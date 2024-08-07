@@ -1,16 +1,16 @@
 <!-- <app-loader *ngIf="isLoading"></app-loader> -->
 <div class="background">
     <tui-loader
-        [showLoader]="isLoading"
         size="xl"
-        [inheritColor]="true"
-        class="" />
+        class=""
+        [showLoader]="isLoading"
+        [inheritColor]="true" />
 
     <form
-        [formGroup]="loginForm"
         *ngIf="!isLoading"
-        (ngSubmit)="onFormSubmit()"
-        class="login-form">
+        class="login-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="onFormSubmit()">
         <label class="login-form-label">Login</label>
 
         <tui-input formControlName="username" class="login-form-input">

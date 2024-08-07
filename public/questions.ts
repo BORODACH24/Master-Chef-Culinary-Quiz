@@ -1,6 +1,7 @@
-export const questions = [
+export const rounds = [
     {
-        round: 1,
+        round: 0,
+        difficulty: 0,
         questions: [
             {
                 type: "simple",
@@ -19,7 +20,6 @@ export const questions = [
                         correct: false,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -31,7 +31,7 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
+                
             },
             {
                 type: "simple",
@@ -43,7 +43,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -55,7 +54,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -66,12 +64,12 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
         ],
     },
     {
-        round: 2,
+        round: 1,
+        difficulty: 0,
         questions: [
             {
                 type: "simple",
@@ -83,7 +81,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -94,7 +91,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -105,7 +101,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -117,7 +112,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -128,12 +122,12 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
         ],
     },
     {
-        round: 3,
+        round: 2,
+        difficulty: 0,
         questions: [
             {
                 type: "simple",
@@ -145,7 +139,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -156,7 +149,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -167,7 +159,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -178,7 +169,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
             {
                 type: "simple",
@@ -190,12 +180,12 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
         ],
     },
     {
-        round: 4,
+        round: 3,
+        difficulty: 1,
         questions: [
             {
                 type: "simple",
@@ -207,7 +197,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 0,
             },
 
             {
@@ -220,7 +209,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 1,
             },
             {
                 type: "image",
@@ -232,7 +220,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 1,
             },
             {
                 type: "image",
@@ -244,7 +231,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 1,
             },
             {
                 type: "image",
@@ -256,12 +242,12 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 1,
             },
         ],
     },
     {
-        round: 5,
+        round: 4,
+        difficulty: 2,
         questions: [
             {
                 type: "simple",
@@ -272,7 +258,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -284,7 +269,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -295,7 +279,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "multiple",
@@ -311,7 +294,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -323,12 +305,12 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
         ],
     },
     {
-        round: 6,
+        round: 5,
+        difficulty: 2,
         questions: [
             {
                 type: "simple",
@@ -340,7 +322,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -351,7 +332,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -363,7 +343,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -375,7 +354,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -387,12 +365,12 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
         ],
     },
     {
-        round: 7,
+        round: 6,
+        difficulty: 2,
         questions: [
             {
                 type: "simple",
@@ -403,7 +381,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -414,10 +391,9 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
-                type: "simple",
+                type: "input",
                 question: "How do Americans call an Aubergine?",
                 answers: [
                     {
@@ -425,7 +401,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -436,7 +411,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -447,12 +421,12 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
         ],
     },
     {
-        round: 8,
+        round: 7,
+        difficulty: 2,
         questions: [
             {
                 type: "simple",
@@ -463,7 +437,6 @@ export const questions = [
                         correct: true,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -479,7 +452,6 @@ export const questions = [
                         correct: false,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -494,7 +466,6 @@ export const questions = [
                         correct: false,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "simple",
@@ -510,7 +481,6 @@ export const questions = [
                         correct: false,
                     },
                 ],
-                difficulty: 2,
             },
             {
                 type: "multiple",
@@ -537,7 +507,6 @@ export const questions = [
                         correct: false,
                     },
                 ],
-                difficulty: 2,
             },
         ],
     },

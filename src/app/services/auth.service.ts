@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
+import { Observable } from "rxjs";
 import { User } from "../interfaces/user";
 
 @Injectable({
@@ -12,11 +13,8 @@ export class AuthService {
     public user?: User;
 
     private cookies = inject(CookieService);
-
-    constructor(
-        private http: HttpClient,
-        private router: Router
-    ) {}
+    private http = inject(HttpClient);
+    private router = inject(Router);
 
     public isAuth(): boolean {
         if (!this.token) {
@@ -25,13 +23,13 @@ export class AuthService {
         return !!this.token;
     }
 
-    public login(username: string, password: string) {
+    public login(username: string, password: string): Observable<User> {
         return this.http.post<User>("https://dummyjson.com/auth/login", {
             username,
             password,
         });
     }
-    public register(username: string, email: string, password: string) {
+    public register(username: string, email: string, password: string): Observable<User> {
         return this.http.post<User>("https://dummyjson.com/users/add", {
             username,
             email,
@@ -39,7 +37,7 @@ export class AuthService {
         });
     }
 
-    public getUser() {
+    public getUser(): Observable<User> {
         return this.http.get<User>("https://dummyjson.com/auth/me");
     }
 }

@@ -1,10 +1,33 @@
-import { Component, OnInit } from "@angular/core";
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { questions } from "../../../../public/questions";
+import { CommonModule } from "@angular/common";
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Inject,
+    ViewChild,
+    ElementRef,
+} from "@angular/core";
+import {
+    FormArray,
+    FormControl,
+    FormGroup,
+    ReactiveFormsModule,
+    Validators,
+} from "@angular/forms";
+import { rounds } from "../../../../public/questions";
+import { InputQuestionPlateComponent } from "../../components/input-question-plate/input-question-plate.component";
 import { MultipleChoiceQuestionPlateComponent } from "../../components/multiple-choice-question-plate/multiple-choice-question-plate.component";
 import { SimpleQuestionPlateComponent } from "../../components/simple-question-plate/simple-question-plate.component";
-import { Answer, Question } from "../../interfaces/questions";
-import { CommonModule } from "@angular/common";
+import { Answer, Question, Round } from "../../interfaces/questions";
+import {
+    TuiDialogContext,
+    TuiDialogService,
+    TuiDialogSize,
+} from "@taiga-ui/core";
+import { PolymorpheusContent } from "@tinkoff/ng-polymorpheus";
+import { Observable, tap } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-game-page",
@@ -13,48 +36,119 @@ import { CommonModule } from "@angular/common";
         SimpleQuestionPlateComponent,
         MultipleChoiceQuestionPlateComponent,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        InputQuestionPlateComponent,
     ],
     templateUrl: "./game-page.component.html",
     styleUrl: "./game-page.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamePageComponent implements OnInit {
-    public questions = [];
+    @ViewChild("header", { static: true }) header: ElementRef | undefined;
+    @ViewChild("content", { static: true }) content: ElementRef | undefined;
+
+    public rounds: Round[] = [];
+    public roundIndex = 0;
     public roundQuestions: Question[] = [];
     public form = new FormGroup({
         questions: new FormArray([]),
     });
 
-    ngOnInit(): void {
-        this.questions = questions as [];
-        this.roundQuestions = questions[7].questions as [];
-        this.roundQuestions.forEach(item => {
-            if (item.type === "multiple") {
-                (this.form.get("questions") as FormArray).push(
-                    new FormControl(null, Validators.required)
-                );
-            } else {
-                (this.form.get("questions") as FormArray).push(
-                    new FormControl(null, Validators.required)
-                );
-            }
+    constructor(
+        @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
+        private router: Router,
+        private cdr: ChangeDetectorRef
+    ) {}
+
+    public ngOnInit(): void {
+        this.rounds = rounds;
+        this.renderQuestions();
+    }
+    public renderQuestions(): void {
+        this.roundQuestions = rounds[this.roundIndex].questions;
+        this.form = new FormGroup({
+            questions: new FormArray([]),
+        });
+        this.roundQuestions.forEach(() => {
+            (this.form.get("questions") as FormArray).push(
+                new FormControl(null, Validators.required)
+            );
         });
     }
 
-    public onSubmit(){
-        
-        // console.log(this.form);
-        console.log(this.form.value);
-        console.log(
-            this.form.value.questions?.every((item: Answer | Answer[])=>{
-                if(typeof(item) === typeof(Array)){
-                    (item as Answer[])?.forEach(element => {
-                        return element.currect
-                    });
+    public onSubmit(): void {
+        if (this.checkAnswers(this.form.value)) {
+            this.showDialog(
+                this.content,
+                this.header,
+                "m",
+                `You have passed Round ${this.roundIndex + 1}`
+            );
+        }
+    }
+    public checkAnswers(value: any): boolean {
+        console.log(this.form);
+        const a = value.questions?.every(
+            (item: Answer | Answer[], index: number) => {
+                console.log(item);
+                console.log(typeof item);
+                if (item instanceof Array) {
+                    return this.checkMultipleAnswer(item, index);
+                } else if (typeof item === typeof "") {
+                    return this.checkInputAnswer(item.toString(), index);
                 }
-                return (item as Answer)?.currect
 
-            })
+                console.log((item as Answer)?.correct);
+
+                return (item as Answer)?.correct;
+            }
         );
+        console.log(a);
+        return a;
+    }
+    private checkMultipleAnswer(answer: Answer[], index: number): boolean {
+        const currectAnswersNum = this.roundQuestions[index].answers.filter(
+            item => item.correct
+        ).length;
+        if (currectAnswersNum === answer.length) {
+            return (answer as Answer[])?.every(element => {
+                console.log(element);
+
+                return element.correct;
+            });
+        }
+        return false;
+    }
+    private checkInputAnswer(item: string, index: number): boolean {
+        return (
+            item.toLowerCase() ===
+            this.roundQuestions[index].answers[0].answer.toLowerCase()
+        );
+    }
+    private showDialog(
+        content: PolymorpheusContent<TuiDialogContext>,
+        header: PolymorpheusContent,
+        size: TuiDialogSize,
+        label: string
+    ): void {
+        this.dialogs
+            .open(content, {
+                label,
+                header,
+                size,
+            })
+            .subscribe();
+    }
+    public onDialogNextButtonClick(observer: any) {
+        observer.complete();
+        if (++this.roundIndex > rounds.length) {
+            this.roundIndex = 0;
+        }
+        this.renderQuestions();
+        this.cdr.detectChanges();
+    }
+    public onDialogMenuButtonClick(observer: any) {
+        observer.complete();
+        this.router.navigate(["main"])
     }
 }

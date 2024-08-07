@@ -2,16 +2,16 @@
 <div class="background">
 
         <tui-loader
-            [showLoader]="isLoading"
             size="xl"
-            [inheritColor]="true"
-            class="" />
+            class=""
+            [showLoader]="isLoading"
+            [inheritColor]="true" />
 
     <form
-        [formGroup]="registerForm"
         *ngIf="!isLoading"
-        (ngSubmit)="onFormSubmit()"
-        class="login-form">
+        class="login-form"
+        [formGroup]="registerForm"
+        (ngSubmit)="onFormSubmit()">
         <label class="login-form-label">Registration</label>
 
         <tui-input formControlName="username" class="login-form-input">

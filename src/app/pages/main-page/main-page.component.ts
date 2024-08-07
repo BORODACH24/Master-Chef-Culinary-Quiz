@@ -12,7 +12,7 @@ import { BackendService } from "../../services/backend.service";
 })
 export class MainPageComponent implements OnInit {
     private audio = inject(BackendService).audio;
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.audio.play();
     }
 }

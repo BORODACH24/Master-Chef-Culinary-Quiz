@@ -10,7 +10,7 @@ export function registerValidator(): ValidatorFn {
 }
 
 export function getErrorMessage(control: AbstractControl): TuiValidationError | null {
-    if(!control.touched){
+    if (!control.touched){
         return null;
     }
     if (control.hasError("required")) {
@@ -23,11 +23,11 @@ export function getErrorMessage(control: AbstractControl): TuiValidationError | 
         return new TuiValidationError(`Less than ${control.errors?.["maxlength"]?.["requiredLength"]}`);
     }
     if (control.hasError("email")) {
-        return  new TuiValidationError(`Email error`);
+        return new TuiValidationError(`Email error`);
     }
     if (control.hasError("pattern")) {
-        return  new TuiValidationError(`Pattern error`);
+        return new TuiValidationError(`Pattern error`);
     }
-    return null
+    return null;
 }
 

@@ -1,5 +1,5 @@
+import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
-import { Question } from "../../interfaces/questions";
 import {
     FormArray,
     FormControl,
@@ -7,7 +7,7 @@ import {
     ReactiveFormsModule,
 } from "@angular/forms";
 import { TuiCheckboxLabeledModule } from "@taiga-ui/kit";
-import { CommonModule } from "@angular/common";
+import { Question } from "../../interfaces/questions";
 
 @Component({
     selector: "app-multiple-choice-question-plate",
@@ -17,20 +17,20 @@ import { CommonModule } from "@angular/common";
     styleUrl: "./multiple-choice-question-plate.component.scss",
 })
 export class MultipleChoiceQuestionPlateComponent implements OnInit {
-    @Input() question?: Question;
-    @Input() control!: FormControl;
+    @Input() public question?: Question;
+    @Input() public control!: FormControl;
     public form = new FormGroup({
         answers: new FormArray([]),
     });
-    ngOnInit(): void {
-        this.question?.answers.forEach(item => {
+    public ngOnInit(): void {
+        this.question?.answers.forEach(() => {
             (this.form.get("answers") as FormArray).push(
                 new FormControl(false)
             );
         });
-        this.form.valueChanges.subscribe(data => {
+        this.form.valueChanges.subscribe((data) => {
             console.log(data);
-            let temp = data.answers?.map((item, index) =>
+            const temp = data.answers?.map((item, index) =>
                 item ? this.question?.answers[index] : null
             );
             this.control.setValue(temp?.filter((item)=>item));

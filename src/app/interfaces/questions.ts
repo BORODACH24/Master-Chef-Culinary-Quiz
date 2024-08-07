@@ -1,3 +1,8 @@
+export interface Round {
+    round: number;
+    difficulty: number;
+    questions: Question[];
+}
 export interface Question {
     type: string;
     question: string;
@@ -9,5 +14,5 @@ export interface ImageQuestion extends Question{
 }
 export interface Answer {
     answer: string;
-    currect: boolean;
+    correct: boolean;
 }
