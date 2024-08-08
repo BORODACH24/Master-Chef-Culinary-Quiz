@@ -1,50 +1,67 @@
-<p>game-page works!</p>
+<!-- <p>game-page works!</p> -->
 
 <form class="game-field" [formGroup]="form" (ngSubmit)="onSubmit()">
-    @for (item of roundQuestions; track $index) { @if (item.type === 'simple') {
-    <app-simple-question-plate
-        [question]="item"
-        [control]="
-            form.controls['questions'].controls[$index]
-        "></app-simple-question-plate>
-    } @if (item.type === 'multiple') {
-    <app-multiple-choice-question-plate
-        [question]="item"
-        [control]="
-            form.controls['questions'].controls[$index]
-        "></app-multiple-choice-question-plate>
-    } @if (item.type === 'input') {
-    <app-input-question-plate
-        [question]="item"
-        [control]="
-            form.controls['questions'].controls[$index]
-        "></app-input-question-plate>
-    } @if (item.type === 'drag') {
-    <app-multiple-choice-question-plate
-        [question]="item"
-        [control]="
-            form.controls['questions'].controls[$index]
-        "></app-multiple-choice-question-plate>
-    } }
+    <app-top-bar
+        buttonText="Menu"
+        [buttonAction]="onDialogMenuButtonClick.bind(this)"
+        [label]="'Round ' + (roundIndex + 1)"></app-top-bar>
+    <tui-scrollbar style="border-radius: 24px">
+        <div class="questions">
+            @for (item of roundQuestions; track $index) { @if (item.type ===
+            'simple') {
+            <app-simple-question-plate
+                [changingValue]="changingValue"
+                [question]="item"
+                [control]="
+                    form.controls['questions'].controls[$index]
+                "></app-simple-question-plate>
+            } @if (item.type === 'multiple') {
+            <app-multiple-choice-question-plate
+                [changingValue]="changingValue"
+                [question]="item"
+                [control]="
+                    form.controls['questions'].controls[$index]
+                "></app-multiple-choice-question-plate>
+            } @if (item.type === 'input') {
+            <app-input-question-plate
+                [changingValue]="changingValue"
+                [question]="item"
+                [control]="
+                    form.controls['questions'].controls[$index]
+                "></app-input-question-plate>
+            } @if (item.type === 'drag') {
+            <app-multiple-choice-question-plate
+                [question]="item"
+                [control]="
+                    form.controls['questions'].controls[$index]
+                "></app-multiple-choice-question-plate>
+            } }
+        </div>
+    </tui-scrollbar>
     <button type="submit" class="submit-button">Check</button>
 </form>
 
 <ng-template #header>
     <div class="dialog-header">
-        <img
-            alt="Cool"
-            src="/images/congratulation-background.jpg" />
+        <img alt="Cool" src="/images/congratulation-background.jpg" />
     </div>
 </ng-template>
 <ng-template #content let-observer>
     Take a look
     <div class="buttons">
-        <button size="m" tuiButton type="button" (click)="onDialogNextButtonClick(observer)">
+        <button
+            size="m"
+            tuiButton
+            type="button"
+            (click)="onDialogNextButtonClick(observer)">
             Very cool!
         </button>
-        <button size="m" tuiButton type="button" (click)="onDialogMenuButtonClick(observer)">
+        <button
+            size="m"
+            tuiButton
+            type="button"
+            (click)="onDialogMenuButtonClick(observer)">
             Main menu
         </button>
     </div>
 </ng-template>
-

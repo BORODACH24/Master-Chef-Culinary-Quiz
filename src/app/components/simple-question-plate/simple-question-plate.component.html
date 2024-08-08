@@ -1,7 +1,10 @@
 <div class="question-plate">
-    <label>{{ question?.question }}</label>     
+    <label>{{ label }}</label>
+    <h3>{{ question?.question }}</h3>     
         <tui-radio-labeled
-        *ngFor="let answer of question?.answers"
+        #answers
+        *ngFor="let answer of question?.answers; index as i"
+        [id]="i"
         class="tui-space_bottom-3"
         [formControl]="control"
         [item]="answer">

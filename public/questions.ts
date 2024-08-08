@@ -19,6 +19,14 @@ export const rounds = [
                         answer: "France",
                         correct: false,
                     },
+                    {
+                        answer: "Italy",
+                        correct: false,
+                    },
+                    {
+                        answer: "Brazil",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -30,8 +38,23 @@ export const rounds = [
                         answer: "Ambrosia",
                         correct: true,
                     },
+                    {
+                        answer: "Nectar",
+                        correct: false,
+                    },
+                    {
+                        answer: "Golden Apples",
+                        correct: false,
+                    },
+                    {
+                        answer: "Divine Cheese",
+                        correct: false,
+                    },
+                    {
+                        answer: "Ambrosial Popcorn",
+                        correct: false,
+                    },
                 ],
-                
             },
             {
                 type: "simple",
@@ -41,6 +64,22 @@ export const rounds = [
                     {
                         answer: "Red peppers",
                         correct: true,
+                    },
+                    {
+                        answer: "Broccoli",
+                        correct: false,
+                    },
+                    {
+                        answer: "Pineapple",
+                        correct: false,
+                    },
+                    {
+                        answer: "Tomato Sauce",
+                        correct: false,
+                    },
+                    {
+                        answer: "Pickle Relish",
+                        correct: false,
                     },
                 ],
             },
@@ -53,6 +92,22 @@ export const rounds = [
                         answer: "Japan",
                         correct: true,
                     },
+                    {
+                        answer: "France",
+                        correct: false,
+                    },
+                    {
+                        answer: "Italy",
+                        correct: false,
+                    },
+                    {
+                        answer: "United States",
+                        correct: false,
+                    },
+                    {
+                        answer: "Australia",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -62,6 +117,22 @@ export const rounds = [
                     {
                         answer: "England",
                         correct: true,
+                    },
+                    {
+                        answer: "Scotland",
+                        correct: false,
+                    },
+                    {
+                        answer: "China",
+                        correct: false,
+                    },
+                    {
+                        answer: "Egypt",
+                        correct: false,
+                    },
+                    {
+                        answer: "Antarctica",
+                        correct: false,
                     },
                 ],
             },
@@ -80,6 +151,22 @@ export const rounds = [
                         answer: "Ketchup",
                         correct: true,
                     },
+                    {
+                        answer: "Mustard",
+                        correct: false,
+                    },
+                    {
+                        answer: "Mayonnaise",
+                        correct: false,
+                    },
+                    {
+                        answer: "Soy Sauce",
+                        correct: false,
+                    },
+                    {
+                        answer: "Chocolate Syrup",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -90,6 +177,22 @@ export const rounds = [
                         answer: "Almonds",
                         correct: true,
                     },
+                    {
+                        answer: "Peanuts",
+                        correct: false,
+                    },
+                    {
+                        answer: "Walnuts",
+                        correct: false,
+                    },
+                    {
+                        answer: "Cashews",
+                        correct: false,
+                    },
+                    {
+                        answer: "Hazelnuts",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -99,6 +202,22 @@ export const rounds = [
                     {
                         answer: "Small Football",
                         correct: true,
+                    },
+                    {
+                        answer: "Perfect Sphere",
+                        correct: false,
+                    },
+                    {
+                        answer: "Long Cylinder",
+                        correct: false,
+                    },
+                    {
+                        answer: "Star Shape",
+                        correct: false,
+                    },
+                    {
+                        answer: "Dice",
+                        correct: false,
                     },
                 ],
             },
@@ -111,6 +230,22 @@ export const rounds = [
                         answer: "Waffle fries",
                         correct: true,
                     },
+                    {
+                        answer: "Hash Browns",
+                        correct: false,
+                    },
+                    {
+                        answer: "French Fries",
+                        correct: false,
+                    },
+                    {
+                        answer: "Potato Chips",
+                        correct: false,
+                    },
+                    {
+                        answer: "Tater Tots",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -120,6 +255,22 @@ export const rounds = [
                     {
                         answer: "Spanish Tortilla",
                         correct: true,
+                    },
+                    {
+                        answer: "Spanish Pizza",
+                        correct: false,
+                    },
+                    {
+                        answer: "Spanish Soup",
+                        correct: false,
+                    },
+                    {
+                        answer: "Spanish Bread",
+                        correct: false,
+                    },
+                    {
+                        answer: "Spanish Salad",
+                        correct: false,
                     },
                 ],
             },
@@ -138,6 +289,22 @@ export const rounds = [
                         answer: "Ghost pepper",
                         correct: true,
                     },
+                    {
+                        answer: "Jalapeno",
+                        correct: false,
+                    },
+                    {
+                        answer: "Cayenne",
+                        correct: false,
+                    },
+                    {
+                        answer: "Habanero",
+                        correct: false,
+                    },
+                    {
+                        answer: "Carolina Reaper",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -147,6 +314,22 @@ export const rounds = [
                     {
                         answer: "Garlic",
                         correct: true,
+                    },
+                    {
+                        answer: "Onion",
+                        correct: false,
+                    },
+                    {
+                        answer: "Pepper",
+                        correct: false,
+                    },
+                    {
+                        answer: "Cumin",
+                        correct: false,
+                    },
+                    {
+                        answer: "Turmeric",
+                        correct: false,
                     },
                 ],
             },
@@ -158,6 +341,22 @@ export const rounds = [
                         answer: "Hamburger",
                         correct: true,
                     },
+                    {
+                        answer: "Pizza",
+                        correct: false,
+                    },
+                    {
+                        answer: "Hot Dog",
+                        correct: false,
+                    },
+                    {
+                        answer: "Apple Pie",
+                        correct: false,
+                    },
+                    {
+                        answer: "Chicken Nuggets",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -167,6 +366,22 @@ export const rounds = [
                     {
                         answer: "Blueberries",
                         correct: true,
+                    },
+                    {
+                        answer: "Strawberries",
+                        correct: false,
+                    },
+                    {
+                        answer: "Grapes",
+                        correct: false,
+                    },
+                    {
+                        answer: "Oranges",
+                        correct: false,
+                    },
+                    {
+                        answer: "Bananas",
+                        correct: false,
                     },
                 ],
             },
@@ -178,6 +393,22 @@ export const rounds = [
                     {
                         answer: "Sushi",
                         correct: true,
+                    },
+                    {
+                        answer: "Sashimi",
+                        correct: false,
+                    },
+                    {
+                        answer: "Tempura",
+                        correct: false,
+                    },
+                    {
+                        answer: "Ramen",
+                        correct: false,
+                    },
+                    {
+                        answer: "Miso Soup",
+                        correct: false,
                     },
                 ],
             },
@@ -195,6 +426,22 @@ export const rounds = [
                     {
                         answer: "Saffron",
                         correct: true,
+                    },
+                    {
+                        answer: "Vanilla",
+                        correct: false,
+                    },
+                    {
+                        answer: "Cardamom",
+                        correct: false,
+                    },
+                    {
+                        answer: "Cinnamon",
+                        correct: false,
+                    },
+                    {
+                        answer: "Peppercorn",
+                        correct: false,
                     },
                 ],
             },
@@ -257,6 +504,22 @@ export const rounds = [
                         answer: "Honey",
                         correct: true,
                     },
+                    {
+                        answer: "Salt",
+                        correct: false,
+                    },
+                    {
+                        answer: "Sugar",
+                        correct: false,
+                    },
+                    {
+                        answer: "Rice",
+                        correct: false,
+                    },
+                    {
+                        answer: "Dried Beans",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -268,6 +531,22 @@ export const rounds = [
                         answer: "Hawaii",
                         correct: true,
                     },
+                    {
+                        answer: "California",
+                        correct: false,
+                    },
+                    {
+                        answer: "Florida",
+                        correct: false,
+                    },
+                    {
+                        answer: "Alaska",
+                        correct: false,
+                    },
+                    {
+                        answer: "Texas",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -277,6 +556,22 @@ export const rounds = [
                     {
                         answer: "Cheese",
                         correct: true,
+                    },
+                    {
+                        answer: "Chocolate",
+                        correct: false,
+                    },
+                    {
+                        answer: "Meat",
+                        correct: false,
+                    },
+                    {
+                        answer: "Bread",
+                        correct: false,
+                    },
+                    {
+                        answer: "Alcohol",
+                        correct: false,
                     },
                 ],
             },
@@ -293,6 +588,18 @@ export const rounds = [
                         answer: "Pasta",
                         correct: true,
                     },
+                    {
+                        answer: "Burgers",
+                        correct: false,
+                    },
+                    {
+                        answer: "Tacos",
+                        correct: false,
+                    },
+                    {
+                        answer: "Fried Rice",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -303,6 +610,22 @@ export const rounds = [
                     {
                         answer: "Apples",
                         correct: true,
+                    },
+                    {
+                        answer: "Bananas",
+                        correct: false,
+                    },
+                    {
+                        answer: "Grapes",
+                        correct: false,
+                    },
+                    {
+                        answer: "Oranges",
+                        correct: false,
+                    },
+                    {
+                        answer: "Mangoes",
+                        correct: false,
                     },
                 ],
             },
@@ -321,6 +644,22 @@ export const rounds = [
                         answer: "Sailfish",
                         correct: true,
                     },
+                    {
+                        answer: "Tuna",
+                        correct: false,
+                    },
+                    {
+                        answer: "Salmon",
+                        correct: false,
+                    },
+                    {
+                        answer: "Swordfish",
+                        correct: false,
+                    },
+                    {
+                        answer: "Marlin",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -330,6 +669,22 @@ export const rounds = [
                     {
                         answer: "Black Pepper",
                         correct: true,
+                    },
+                    {
+                        answer: "Cinnamon",
+                        correct: false,
+                    },
+                    {
+                        answer: "Clove",
+                        correct: false,
+                    },
+                    {
+                        answer: "Nutmeg",
+                        correct: false,
+                    },
+                    {
+                        answer: "Turmeric",
+                        correct: false,
                     },
                 ],
             },
@@ -342,6 +697,22 @@ export const rounds = [
                         answer: "Potatoes",
                         correct: true,
                     },
+                    {
+                        answer: "Lettuce",
+                        correct: false,
+                    },
+                    {
+                        answer: "Tomatoes",
+                        correct: false,
+                    },
+                    {
+                        answer: "Carrots",
+                        correct: false,
+                    },
+                    {
+                        answer: "Peas",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -353,6 +724,22 @@ export const rounds = [
                         answer: "Ben & Jerry's",
                         correct: true,
                     },
+                    {
+                        answer: "Haagen-Dazs",
+                        correct: false,
+                    },
+                    {
+                        answer: "Breyers",
+                        correct: false,
+                    },
+                    {
+                        answer: "Talenti",
+                        correct: false,
+                    },
+                    {
+                        answer: "Magnum",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -363,6 +750,22 @@ export const rounds = [
                     {
                         answer: "Wasabi",
                         correct: true,
+                    },
+                    {
+                        answer: "Ginger",
+                        correct: false,
+                    },
+                    {
+                        answer: "Garlic",
+                        correct: false,
+                    },
+                    {
+                        answer: "Mustard",
+                        correct: false,
+                    },
+                    {
+                        answer: "Horseradish",
+                        correct: false,
                     },
                 ],
             },
@@ -380,6 +783,22 @@ export const rounds = [
                         answer: "Venison",
                         correct: true,
                     },
+                    {
+                        answer: "Beef",
+                        correct: false,
+                    },
+                    {
+                        answer: "Elk",
+                        correct: false,
+                    },
+                    {
+                        answer: "Lamb",
+                        correct: false,
+                    },
+                    {
+                        answer: "Pork",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -389,6 +808,22 @@ export const rounds = [
                     {
                         answer: "Capsicum",
                         correct: true,
+                    },
+                    {
+                        answer: "Chili",
+                        correct: false,
+                    },
+                    {
+                        answer: "Bell Pepper",
+                        correct: false,
+                    },
+                    {
+                        answer: "Pepperoni",
+                        correct: false,
+                    },
+                    {
+                        answer: "Paprika",
+                        correct: false,
                     },
                 ],
             },
@@ -410,6 +845,22 @@ export const rounds = [
                         answer: "Snails",
                         correct: true,
                     },
+                    {
+                        answer: "Frogs",
+                        correct: false,
+                    },
+                    {
+                        answer: "Worms",
+                        correct: false,
+                    },
+                    {
+                        answer: "Insects",
+                        correct: false,
+                    },
+                    {
+                        answer: "Clams",
+                        correct: false,
+                    },
                 ],
             },
             {
@@ -419,6 +870,22 @@ export const rounds = [
                     {
                         answer: "A fish",
                         correct: true,
+                    },
+                    {
+                        answer: "A reptile",
+                        correct: false,
+                    },
+                    {
+                        answer: "A mammal",
+                        correct: false,
+                    },
+                    {
+                        answer: "A bird",
+                        correct: false,
+                    },
+                    {
+                        answer: "An insect",
+                        correct: false,
                     },
                 ],
             },
@@ -435,6 +902,22 @@ export const rounds = [
                     {
                         answer: "A thousand sheets",
                         correct: true,
+                    },
+                    {
+                        answer: "A thousand flowers",
+                        correct: false,
+                    },
+                    {
+                        answer: "A thousand layers",
+                        correct: false,
+                    },
+                    {
+                        answer: "A thousand flavors",
+                        correct: false,
+                    },
+                    {
+                        answer: "A thousand wishes",
+                        correct: false,
                     },
                 ],
             },
@@ -504,6 +987,14 @@ export const rounds = [
                     },
                     {
                         answer: "pomegranate",
+                        correct: false,
+                    },
+                    {
+                        answer: "banana",
+                        correct: false,
+                    },
+                    {
+                        answer: "strawberry",
                         correct: false,
                     },
                 ],

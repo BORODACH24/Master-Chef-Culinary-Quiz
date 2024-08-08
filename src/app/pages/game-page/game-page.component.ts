@@ -1,12 +1,12 @@
 import { CommonModule } from "@angular/common";
 import {
-    Component,
-    OnInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Inject,
-    ViewChild,
+    Component,
     ElementRef,
+    Inject,
+    OnInit,
+    ViewChild,
 } from "@angular/core";
 import {
     FormArray,
@@ -15,30 +15,34 @@ import {
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
+import { Router } from "@angular/router";
+import {
+    TuiDialogContext,
+    TuiDialogService,
+    TuiDialogSize,
+    TuiScrollbarModule,
+} from "@taiga-ui/core";
+import {Subject} from 'rxjs/internal/Subject';
+import { PolymorpheusContent } from "@tinkoff/ng-polymorpheus";
 import { rounds } from "../../../../public/questions";
 import { InputQuestionPlateComponent } from "../../components/input-question-plate/input-question-plate.component";
 import { MultipleChoiceQuestionPlateComponent } from "../../components/multiple-choice-question-plate/multiple-choice-question-plate.component";
 import { SimpleQuestionPlateComponent } from "../../components/simple-question-plate/simple-question-plate.component";
 import { Answer, Question, Round } from "../../interfaces/questions";
-import {
-    TuiDialogContext,
-    TuiDialogService,
-    TuiDialogSize,
-} from "@taiga-ui/core";
-import { PolymorpheusContent } from "@tinkoff/ng-polymorpheus";
-import { Observable, tap } from "rxjs";
-import { Router } from "@angular/router";
+import { TopBarComponent } from "../../components/top-bar/top-bar.component";
 
 @Component({
     selector: "app-game-page",
     standalone: true,
     imports: [
-        SimpleQuestionPlateComponent,
-        MultipleChoiceQuestionPlateComponent,
-        CommonModule,
-        ReactiveFormsModule,
-        InputQuestionPlateComponent,
-    ],
+    SimpleQuestionPlateComponent,
+    MultipleChoiceQuestionPlateComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    InputQuestionPlateComponent,
+    TuiScrollbarModule,
+    TopBarComponent
+],
     templateUrl: "./game-page.component.html",
     styleUrl: "./game-page.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,6 +50,8 @@ import { Router } from "@angular/router";
 export class GamePageComponent implements OnInit {
     @ViewChild("header", { static: true }) header: ElementRef | undefined;
     @ViewChild("content", { static: true }) content: ElementRef | undefined;
+
+    public changingValue = new Subject<boolean>();
 
     public rounds: Round[] = [];
     public roundIndex = 0;
@@ -66,6 +72,7 @@ export class GamePageComponent implements OnInit {
     }
     public renderQuestions(): void {
         this.roundQuestions = rounds[this.roundIndex].questions;
+        this.randomizeAnswers()
         this.form = new FormGroup({
             questions: new FormArray([]),
         });
@@ -76,7 +83,14 @@ export class GamePageComponent implements OnInit {
         });
     }
 
+    public randomizeAnswers() {
+        this.roundQuestions.forEach((item)=>{
+            item.answers.sort(() => Math.random() - 0.5); 
+        })
+    }
+
     public onSubmit(): void {
+        this.changingValue.next(true)
         if (this.checkAnswers(this.form.value)) {
             this.showDialog(
                 this.content,
@@ -88,22 +102,16 @@ export class GamePageComponent implements OnInit {
     }
     public checkAnswers(value: any): boolean {
         console.log(this.form);
-        const a = value.questions?.every(
+        const a = value.questions?.forEach(
             (item: Answer | Answer[], index: number) => {
-                console.log(item);
-                console.log(typeof item);
                 if (item instanceof Array) {
                     return this.checkMultipleAnswer(item, index);
                 } else if (typeof item === typeof "") {
                     return this.checkInputAnswer(item.toString(), index);
                 }
-
-                console.log((item as Answer)?.correct);
-
                 return (item as Answer)?.correct;
             }
         );
-        console.log(a);
         return a;
     }
     private checkMultipleAnswer(answer: Answer[], index: number): boolean {
@@ -147,8 +155,8 @@ export class GamePageComponent implements OnInit {
         this.renderQuestions();
         this.cdr.detectChanges();
     }
-    public onDialogMenuButtonClick(observer: any) {
-        observer.complete();
-        this.router.navigate(["main"])
+    public onDialogMenuButtonClick(observer?: any) {
+        observer?.complete();
+        this.router.navigate(["main"]);
     }
 }

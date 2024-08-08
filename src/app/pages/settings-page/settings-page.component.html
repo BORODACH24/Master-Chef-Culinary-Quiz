@@ -1,14 +1,6 @@
-<p>settings-page works!</p>
-<div class="settings-plate">
-    <button
-        appearance="flat"
-        tuiButton
-        type="button"
-        class="tui-space_right-3 tui-space_bottom-3"
-        [routerLink]="['/main']">
-        Back
-    </button>
-    <form [formGroup]="settingsForm">
+<div>
+    <app-top-bar label="Settings"></app-top-bar>
+    <form [formGroup]="settingsForm" class="settings-plate">
         <label>Music</label>
         <div class="volume">
             <tui-svg src="tuiIconVolume1Large"></tui-svg>

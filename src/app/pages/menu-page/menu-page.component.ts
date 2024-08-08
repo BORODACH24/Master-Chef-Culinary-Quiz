@@ -1,4 +1,9 @@
-import { Component, inject } from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    inject,
+} from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { TuiButtonModule, TuiSvgModule } from "@taiga-ui/core";
 import { CookieService } from "ngx-cookie-service";
@@ -11,23 +16,32 @@ import { TuiPushModule } from "@taiga-ui/kit";
     imports: [RouterModule, TuiButtonModule, TuiPushModule, TuiSvgModule],
     templateUrl: "./menu-page.component.html",
     styleUrl: "./menu-page.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuPageComponent {
     public dialog = false;
-    public count = 1;
 
-    private cookies = inject(CookieService);
-    private router = inject(Router);
     private auth = inject(BackendService).auth;
+    private achivements = inject(BackendService).achivements;
+    constructor(
+        private cookies: CookieService,
+        private router:Router,
+        // private auth: BackendService,
+        private cdr:ChangeDetectorRef
+    ){}
 
     public onAchivementsClick() {
-        console.log(this.count);
-
-        if (this.count === 5) {
-            this.dialog = true;
-            setTimeout(()=>{this.dialog=false},3000)
+        if (this.achivements.count < 5) {
+            this.achivements.count++;
+            if (this.achivements.count === 5) {
+                this.dialog = true;
+                setTimeout(() => {
+                    this.dialog = false;
+                    this.cdr.markForCheck();
+                }, 3000);
+            }
         } else {
-            this.count++;
+            console.log("achivs");
         }
     }
 
