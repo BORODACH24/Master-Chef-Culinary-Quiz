@@ -30,6 +30,9 @@ import { MultipleChoiceQuestionPlateComponent } from "../../components/multiple-
 import { SimpleQuestionPlateComponent } from "../../components/simple-question-plate/simple-question-plate.component";
 import { Answer, Question, Round } from "../../interfaces/questions";
 import { TopBarComponent } from "../../components/top-bar/top-bar.component";
+import { BackendService } from "../../services/backend.service";
+import { DragAndDropQuestionPlateComponent } from "../../components/drag-and-drop-question-plate/drag-and-drop-question-plate.component";
+
 
 @Component({
     selector: "app-game-page",
@@ -41,7 +44,8 @@ import { TopBarComponent } from "../../components/top-bar/top-bar.component";
     ReactiveFormsModule,
     InputQuestionPlateComponent,
     TuiScrollbarModule,
-    TopBarComponent
+    TopBarComponent,
+    DragAndDropQuestionPlateComponent
 ],
     templateUrl: "./game-page.component.html",
     styleUrl: "./game-page.component.scss",
@@ -54,7 +58,7 @@ export class GamePageComponent implements OnInit {
     public changingValue = new Subject<boolean>();
 
     public rounds: Round[] = [];
-    public roundIndex = 0;
+    public roundIndex = 3;
     public roundQuestions: Question[] = [];
     public form = new FormGroup({
         questions: new FormArray([]),
@@ -63,7 +67,8 @@ export class GamePageComponent implements OnInit {
     constructor(
         @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
         private router: Router,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private backend: BackendService
     ) {}
 
     public ngOnInit(): void {
@@ -91,7 +96,10 @@ export class GamePageComponent implements OnInit {
 
     public onSubmit(): void {
         this.changingValue.next(true)
-        if (this.checkAnswers(this.form.value)) {
+        const a = this.backend.check.checkAnswers(this.form.value.questions as Answer[], this.roundQuestions)
+        // console.log(a);
+        
+        if (a) {
             this.showDialog(
                 this.content,
                 this.header,
@@ -100,39 +108,7 @@ export class GamePageComponent implements OnInit {
             );
         }
     }
-    public checkAnswers(value: any): boolean {
-        console.log(this.form);
-        const a = value.questions?.forEach(
-            (item: Answer | Answer[], index: number) => {
-                if (item instanceof Array) {
-                    return this.checkMultipleAnswer(item, index);
-                } else if (typeof item === typeof "") {
-                    return this.checkInputAnswer(item.toString(), index);
-                }
-                return (item as Answer)?.correct;
-            }
-        );
-        return a;
-    }
-    private checkMultipleAnswer(answer: Answer[], index: number): boolean {
-        const currectAnswersNum = this.roundQuestions[index].answers.filter(
-            item => item.correct
-        ).length;
-        if (currectAnswersNum === answer.length) {
-            return (answer as Answer[])?.every(element => {
-                console.log(element);
-
-                return element.correct;
-            });
-        }
-        return false;
-    }
-    private checkInputAnswer(item: string, index: number): boolean {
-        return (
-            item.toLowerCase() ===
-            this.roundQuestions[index].answers[0].answer.toLowerCase()
-        );
-    }
+    
     private showDialog(
         content: PolymorpheusContent<TuiDialogContext>,
         header: PolymorpheusContent,
@@ -147,14 +123,20 @@ export class GamePageComponent implements OnInit {
             })
             .subscribe();
     }
+
     public onDialogNextButtonClick(observer: any) {
         observer.complete();
-        if (++this.roundIndex > rounds.length) {
+        console.log(this.roundIndex, this.roundIndex+1, rounds.length);
+        this.roundIndex++
+        if (this.roundIndex >= rounds.length) {
             this.roundIndex = 0;
+            console.log(this.roundIndex);
+            
         }
         this.renderQuestions();
         this.cdr.detectChanges();
     }
+
     public onDialogMenuButtonClick(observer?: any) {
         observer?.complete();
         this.router.navigate(["main"]);

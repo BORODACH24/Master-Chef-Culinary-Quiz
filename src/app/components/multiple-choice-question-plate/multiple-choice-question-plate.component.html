@@ -1,8 +1,9 @@
-<form class="question-plate"  [formGroup]="form">
-    <label>{{ question?.question }}</label>
+<form [class]="plateClass" [formGroup]="form">
+    <h3>{{ question?.question }}</h3>
     @for (answer of question?.answers; track $index) {
     <tui-checkbox-labeled
-        class="tui-space_bottom-3"
+        [readOnly]="flag"
+        [class]="classes[$index]"
         [formControl]="form.controls['answers'].controls[$index]">
         {{ answer.answer }}
     </tui-checkbox-labeled>

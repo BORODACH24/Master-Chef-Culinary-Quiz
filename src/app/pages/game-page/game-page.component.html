@@ -5,7 +5,7 @@
         buttonText="Menu"
         [buttonAction]="onDialogMenuButtonClick.bind(this)"
         [label]="'Round ' + (roundIndex + 1)"></app-top-bar>
-    <tui-scrollbar style="border-radius: 24px">
+    <tui-scrollbar>
         <div class="questions">
             @for (item of roundQuestions; track $index) { @if (item.type ===
             'simple') {
@@ -30,11 +30,11 @@
                     form.controls['questions'].controls[$index]
                 "></app-input-question-plate>
             } @if (item.type === 'drag') {
-            <app-multiple-choice-question-plate
+            <app-drag-and-drop-question-plate
                 [question]="item"
                 [control]="
                     form.controls['questions'].controls[$index]
-                "></app-multiple-choice-question-plate>
+                "></app-drag-and-drop-question-plate>
             } }
         </div>
     </tui-scrollbar>
@@ -54,7 +54,7 @@
             tuiButton
             type="button"
             (click)="onDialogNextButtonClick(observer)">
-            Very cool!
+            Next
         </button>
         <button
             size="m"

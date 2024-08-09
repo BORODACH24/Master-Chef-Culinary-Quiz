@@ -445,45 +445,29 @@ export const rounds = [
                     },
                 ],
             },
-
             {
-                type: "image",
+                type: "drag",
                 question: "What vegetable is this?",
-                image: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2023/8/4/womans-hand-holding-unpeeled-whole-jerusalem-artichokes-sunchokes.jpg.rend.hgtvcom.406.271.suffix/1691175911266.jpeg",
+
+                images: [
+                    "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2023/8/4/womans-hand-holding-unpeeled-whole-jerusalem-artichokes-sunchokes.jpg.rend.hgtvcom.406.271.suffix/1691175911266.jpeg",
+                    "https://www.melissas.com/cdn/shop/products/image-of-chayote-squash-vegetables-33579281776684_512x512.jpg?v=1679408034",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Fiddlehead_closeup.png/1200px-Fiddlehead_closeup.png",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Romanesco_broccoli_%28Brassica_oleracea%29.jpg/800px-Romanesco_broccoli_%28Brassica_oleracea%29.jpg",
+                ],
                 answers: [
                     {
                         answer: "Sunchokes",
                         correct: true,
                     },
-                ],
-            },
-            {
-                type: "image",
-                question: "What vegetable is this?",
-                image: "https://www.melissas.com/cdn/shop/products/image-of-chayote-squash-vegetables-33579281776684_512x512.jpg?v=1679408034",
-                answers: [
                     {
                         answer: "Chayote squash",
                         correct: true,
                     },
-                ],
-            },
-            {
-                type: "image",
-                question: "What vegetable is this?",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Fiddlehead_closeup.png/1200px-Fiddlehead_closeup.png",
-                answers: [
                     {
                         answer: "Fiddleheads",
                         correct: true,
                     },
-                ],
-            },
-            {
-                type: "image",
-                question: "What vegetable is this?",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Romanesco_broccoli_%28Brassica_oleracea%29.jpg/800px-Romanesco_broccoli_%28Brassica_oleracea%29.jpg",
-                answers: [
                     {
                         answer: "Romanesco",
                         correct: true,

@@ -13,10 +13,12 @@ export const routes: Routes = [
     {
         path: "main",
         component: MainPageComponent,
+        // loadComponent: ()=>import('./pages/main-page/main-page.component').then((i)=>i.MainPageComponent),
         canActivate: [authGuard],
         children: [
             { path: "", component: MenuPageComponent },
             { path: "game", component: GamePageComponent },
+            // { path: "game", loadComponent: ()=>import('./pages/game-page/game-page.component').then((i)=>i.GamePageComponent) },
             { path: "settings", component: SettingsPageComponent },
         ],
     },

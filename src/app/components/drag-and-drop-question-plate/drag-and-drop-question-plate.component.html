@@ -1,0 +1,13 @@
+<div [class]="plateClass">
+    <h3>{{ question?.question }}</h3>     
+    <div class="images">
+        @for (item of question?.images; track $index) {
+            <img [src]="item" alt="">
+        }
+    </div>
+    <div>
+        @for (item of question?.answers; track $index) {
+            <label>{{item.answer}} </label>
+        }        
+    </div>
+</div>

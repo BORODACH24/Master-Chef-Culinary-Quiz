@@ -1,6 +1,8 @@
-<div class="question-plate">
-    <label>{{ question?.question }}</label>     
-    <tui-input [formControl]="control">
+<div [class]="plateClass">
+    <h3>{{ question?.question }}</h3>
+
+    <tui-input [formControl]="control" [readOnly]="flag">
         Type your answer
     </tui-input>
+    <label *ngIf="flag" class="correct-answer-label">Correct: {{ question?.answers?.[0]?.answer }}</label>
 </div>

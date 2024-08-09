@@ -4,16 +4,15 @@ import {
     ChangeDetectorRef,
     Component,
     Input,
+    OnChanges,
     OnInit,
-    ViewChildren,
-    QueryList,
-    Renderer2,
-    ElementRef
+    DestroyRef
 } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { TuiRadioLabeledModule } from "@taiga-ui/kit";
 import { Subject } from "rxjs/internal/Subject";
-import { Question } from "../../interfaces/questions";
+import { Answer, Question } from "../../interfaces/questions";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-simple-question-plate",
@@ -23,23 +22,39 @@ import { Question } from "../../interfaces/questions";
     styleUrl: "./simple-question-plate.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SimpleQuestionPlateComponent implements OnInit {
+export class SimpleQuestionPlateComponent implements OnInit, OnChanges {
     @Input() public question?: Question;
-    @Input() public control!: FormControl;
+    @Input() public control: FormControl = new FormControl();
     @Input() public changingValue?: Subject<boolean>;
-    @ViewChildren('answers') elements?: QueryList<ElementRef>;
-    public label = "";
+    public classes: string[] = [];
+    public plateClass = "question-plate";
+    public flag = false;
 
-    constructor(private cdr: ChangeDetectorRef, private renderer: Renderer2) {}
+    constructor(private cdr: ChangeDetectorRef, private destroy: DestroyRef) {}
 
     public ngOnInit(): void {
-        this.changingValue?.subscribe(() => {
-            // this.elements?.get(0)?.nativeElement.classList.add('currect')
-            // console.log(this.elements?.get(0)?.nativeElement.classList.add('currect'));
-            this.renderer.addClass(this.elements?.get(0)?.nativeElement, 'correct');
-            
-            this.label = "test";
+        this.changingValue
+        ?.pipe(takeUntilDestroyed(this.destroy))
+        .subscribe(() => {
+            this.flag = true;
+
+            this.plateClass = (this.control.value as Answer)?.correct
+                ? "question-plate correct"
+                : "question-plate incorrect";
+
+            const correctIndex = this.question?.answers.findIndex(
+                element => element.correct
+            );
+            this.classes[correctIndex as number] = "question-answer correct";
             this.cdr.markForCheck();
         });
+    }
+    public ngOnChanges(): void {
+        this.classes = [];
+        this.question?.answers.forEach(element => {
+            this.classes.push("question-answer");
+        });
+        this.plateClass = "question-plate";
+        this.flag = false;
     }
 }

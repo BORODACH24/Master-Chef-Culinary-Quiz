@@ -25,10 +25,10 @@ export class MenuPageComponent {
     private achivements = inject(BackendService).achivements;
     constructor(
         private cookies: CookieService,
-        private router:Router,
+        private router: Router,
         // private auth: BackendService,
-        private cdr:ChangeDetectorRef
-    ){}
+        private cdr: ChangeDetectorRef
+    ) {}
 
     public onAchivementsClick() {
         if (this.achivements.count < 5) {
@@ -46,9 +46,17 @@ export class MenuPageComponent {
     }
 
     public onLogoutClick(): void {
+        console.log("Logout");
+
         this.auth.token = "";
+
         this.cookies.delete("token");
         this.cookies.delete("refreshToken");
-        this.router.navigate([""]);
+        this.cdr.markForCheck();
+        this.router
+            .navigateByUrl("/login")
+            .then(i =>
+                this.router.navigateByUrl("/login").then(i => console.log(i))
+            );
     }
 }
