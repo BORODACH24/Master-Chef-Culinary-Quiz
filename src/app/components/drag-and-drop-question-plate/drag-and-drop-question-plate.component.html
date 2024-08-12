@@ -1,13 +1,27 @@
 <div [class]="plateClass">
-    <h3>{{ question?.question }}</h3>     
+    <h3>{{ question?.question }}</h3>
     <div class="images">
         @for (item of question?.images; track $index) {
-            <img [src]="item" alt="">
+        <img [src]="item.image" [alt]="item.name" />
         }
     </div>
-    <div>
+    <tui-tiles
+        class="answers"
+        [debounce]="100"
+        [(order)]="order"
+        (orderChange)="onOrderChange()">
         @for (item of question?.answers; track $index) {
-            <label>{{item.answer}} </label>
-        }        
-    </div>
+        <tui-tile class="draggable-plate" [style.order]="order.get($index)">
+            @if (!flag) {
+            <div tuiTileHandle [class]="classes[$index]">
+                {{ item.answer }}
+            </div>
+            }@else {
+            <div [class]="classes[$index]">
+                {{ item.answer }}
+            </div>
+            }
+        </tui-tile>
+        }
+    </tui-tiles>
 </div>

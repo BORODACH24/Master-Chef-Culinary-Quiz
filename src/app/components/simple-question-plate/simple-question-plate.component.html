@@ -1,8 +1,8 @@
 <div [class]="plateClass">
     <h3>{{ question?.question }}</h3>     
         <tui-radio-labeled
-        #answers
         *ngFor="let answer of question?.answers; index as i"
+        #answers
         [class]="classes[i]"
         [readOnly]="flag"
         [formControl]="control"

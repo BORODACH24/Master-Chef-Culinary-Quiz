@@ -6,9 +6,9 @@ import {
 } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { TuiButtonModule, TuiSvgModule } from "@taiga-ui/core";
+import { TuiPushModule } from "@taiga-ui/kit";
 import { CookieService } from "ngx-cookie-service";
 import { BackendService } from "../../services/backend.service";
-import { TuiPushModule } from "@taiga-ui/kit";
 
 @Component({
     selector: "app-menu-page",
@@ -53,10 +53,10 @@ export class MenuPageComponent {
         this.cookies.delete("token");
         this.cookies.delete("refreshToken");
         this.cdr.markForCheck();
-        this.router
-            .navigateByUrl("/login")
-            .then(i =>
-                this.router.navigateByUrl("/login").then(i => console.log(i))
-            );
+        // this.router
+        //     .navigateByUrl("/login")
+        //     .then(i =>
+        //         this.router.navigateByUrl("/login").then(i => console.log(i))
+        //     );
     }
 }

@@ -6,12 +6,16 @@ export interface Round {
 export interface Question {
     type: string;
     question: string;
-    images?: string[];
+    images?: Image[];
     answers: Answer[];
 }
 export interface MultipleChoiceQuestion {}
 export interface DragAndDropGQuestion extends Question{
-    images: string[];
+    images: Image[];
+}
+export interface Image{
+    image: string;
+    name: string;
 }
 export interface Answer {
     answer: string;

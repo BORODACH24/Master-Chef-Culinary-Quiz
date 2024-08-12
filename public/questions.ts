@@ -450,10 +450,22 @@ export const rounds = [
                 question: "What vegetable is this?",
 
                 images: [
-                    "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2023/8/4/womans-hand-holding-unpeeled-whole-jerusalem-artichokes-sunchokes.jpg.rend.hgtvcom.406.271.suffix/1691175911266.jpeg",
-                    "https://www.melissas.com/cdn/shop/products/image-of-chayote-squash-vegetables-33579281776684_512x512.jpg?v=1679408034",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Fiddlehead_closeup.png/1200px-Fiddlehead_closeup.png",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Romanesco_broccoli_%28Brassica_oleracea%29.jpg/800px-Romanesco_broccoli_%28Brassica_oleracea%29.jpg",
+                    {
+                        image: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2023/8/4/womans-hand-holding-unpeeled-whole-jerusalem-artichokes-sunchokes.jpg.rend.hgtvcom.406.271.suffix/1691175911266.jpeg",
+                        name: "Sunchokes",
+                    },
+                    {
+                        image: "https://www.melissas.com/cdn/shop/products/image-of-chayote-squash-vegetables-33579281776684_512x512.jpg?v=1679408034",
+                        name: "Chayote squash",
+                    },
+                    {
+                        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Fiddlehead_closeup.png/1200px-Fiddlehead_closeup.png",
+                        name: "Fiddleheads",
+                    },
+                    {
+                        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Romanesco_broccoli_%28Brassica_oleracea%29.jpg/800px-Romanesco_broccoli_%28Brassica_oleracea%29.jpg",
+                        name: "Romanesco",
+                    },
                 ],
                 answers: [
                     {
@@ -474,12 +486,6 @@ export const rounds = [
                     },
                 ],
             },
-        ],
-    },
-    {
-        round: 4,
-        difficulty: 2,
-        questions: [
             {
                 type: "simple",
                 question: "What is the only food that can never go bad?",
@@ -559,6 +565,12 @@ export const rounds = [
                     },
                 ],
             },
+        ],
+    },
+    {
+        round: 4,
+        difficulty: 2,
+        questions: [
             {
                 type: "multiple",
                 question:
@@ -583,6 +595,46 @@ export const rounds = [
                     {
                         answer: "Fried Rice",
                         correct: false,
+                    },
+                ],
+            },
+            {
+                type: "drag",
+                question: "What dessert is it?",
+                images: [
+                    {
+                        image: "https://www.onceuponachef.com/images/2024/04/pavlova-760x938.jpg",
+                        name: "Pavlova",
+                    },
+                    {
+                        image: "https://c.ndtvimg.com/2022-03/bt1hei5o_kulfi_625x300_14_March_22.jpg",
+                        name: "Kulfi",
+                    },
+                    {
+                        image: "https://www.allrecipes.com/thmb/1aP8lFhJJXky1qjk5fbMTzVAjtU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/12698-Easy-Key-Lime-Pie-ddmfs-103444-4x3-1-eb1a59500e384b2b8939094ce18d08be.jpg",
+                        name: "Key Lime Pie",
+                    },
+                    {
+                        image: "https://omnivorescookbook.com/wp-content/uploads/2023/06/230619_Mango-Coconut-Rice_550.jpg",
+                        name: "Sticky Rice with Mango",
+                    },
+                ],
+                answers: [
+                    {
+                        answer: "Pavlova",
+                        correct: true,
+                    },
+                    {
+                        answer: "Kulfi",
+                        correct: true,
+                    },
+                    {
+                        answer: "Key Lime Pie",
+                        correct: true,
+                    },
+                    {
+                        answer: "Sticky Rice with Mango",
+                        correct: true,
                     },
                 ],
             },
@@ -613,12 +665,6 @@ export const rounds = [
                     },
                 ],
             },
-        ],
-    },
-    {
-        round: 5,
-        difficulty: 2,
-        questions: [
             {
                 type: "simple",
                 question:
@@ -672,6 +718,12 @@ export const rounds = [
                     },
                 ],
             },
+        ],
+    },
+    {
+        round: 5,
+        difficulty: 2,
+        questions: [
             {
                 type: "simple",
                 question:
@@ -726,6 +778,49 @@ export const rounds = [
                     },
                 ],
             },
+            {
+                type: "drag",
+                question: "What pizza is it?",
+                images: [
+                    {
+                        image: "https://italianfoodforever.com/wp-content/uploads/2019/02/strombolin6-735x490.jpg",
+                        name: "Stromboli",
+                    },
+                    {
+                        image: "https://www.grandecheese.com/wp-content/uploads/2020/09/QuattroFormaggiPizza.jpg",
+                        name: "Quattro Formaggi Pizza",
+                    },
+                    {
+                        image: "https://www.thespruceeats.com/thmb/yy3vu0m1bZKkCIqtcnkc9bwqYBs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Pepperonipizzahoriz-3d53b00a7cce429eae3bfb629df356ec.jpg",
+                        name: "Pepperoni Pizza",
+                    },
+                ],
+                answers: [
+                    {
+                        answer: "Stromboli",
+                        correct: true,
+                    },
+                    {
+                        answer: "Quattro Formaggi Pizza",
+                        correct: true,
+                    },
+                    {
+                        answer: "Pepperoni Pizza",
+                        correct: true,
+                    },
+                ],
+            },
+            {
+                type: "input",
+                question: "Often added to dishes for saltiness, what is an anchovy?",
+                answers: [
+                    {
+                        answer: "Fish",
+                        correct: true,
+                    },
+                ],
+            },
+
             {
                 type: "simple",
                 question:

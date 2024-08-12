@@ -60,7 +60,7 @@ export class LoginPageComponent {
             .login(this.loginForm.value.username, this.loginForm.value.password)
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe({
-                next: data => {
+                next: (data) => {
                     console.log("Success");
 
                     this.auth.token = data.token;

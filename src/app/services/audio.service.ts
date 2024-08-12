@@ -74,7 +74,7 @@ export class AudioService {
         });
     }
 
-    public play() {
+    public play(): void {
         if (this.playMusic){
             this.audio.src = this.tracks[this.trackNum];
             this.audio.addEventListener("canplaythrough", (event) => {

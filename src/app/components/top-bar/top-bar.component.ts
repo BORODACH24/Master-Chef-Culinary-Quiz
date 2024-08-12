@@ -1,4 +1,4 @@
-import { Component, Input, inject } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -10,10 +10,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class TopBarComponent {
     @Input() public buttonText = "Back";
-    @Input() public buttonAction = () => {
+    @Input() public label = "";
+    @Input() public buttonAction = (): void => {
         this.router.navigate([".."], { relativeTo: this.route });
     };
-    @Input() public label = "";
 
     constructor(
         private readonly route: ActivatedRoute,

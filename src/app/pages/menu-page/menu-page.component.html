@@ -5,7 +5,7 @@
         Achivements
     </button>
     <button class="menu-button" [routerLink]="['settings']">Settings</button>
-    <button class="menu-button" (click)="onLogoutClick()">Logout</button>
+    <button class="menu-button" [routerLink]="'/login'" (click)="onLogoutClick()">Logout</button>
 </div>
 <tui-push
     *tuiPush="dialog"

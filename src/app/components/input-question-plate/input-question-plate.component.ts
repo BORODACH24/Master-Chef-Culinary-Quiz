@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import {
     Component,
     Input,
@@ -7,13 +8,12 @@ import {
     OnChanges,
     DestroyRef
 } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { TuiInputModule } from "@taiga-ui/kit";
-import { Question } from "../../interfaces/questions";
 import { Subject } from "rxjs/internal/Subject";
+import { Question } from "../../interfaces/questions";
 import { BackendService } from "../../services/backend.service";
-import { CommonModule } from "@angular/common";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-input-question-plate",

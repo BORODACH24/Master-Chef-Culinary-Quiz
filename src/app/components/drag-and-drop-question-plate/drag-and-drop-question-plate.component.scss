@@ -1,7 +1,80 @@
-.images{
+// @import '@taiga-ui/core/styles/taiga-ui-local.scss';
+.images {
     display: flex;
     gap: 12px;
-    img{
+    justify-content: space-around;
+
+    img {
         height: 128px;
     }
 }
+.answers {
+    display: flex;
+    gap: 12px;
+
+    .draggable-plate {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:before {
+            content: "Drop here";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            color: var(--tui-base-06);
+            border-radius: var(--tui-radius-l);
+            border: 1px dashed var(--tui-base-06);
+
+            padding: 12px;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: var(--tui-radius-l);
+
+            padding: 12px;
+
+            &.correct {
+                background-color: var(--plate-correct-color);
+            }
+            &.incorrect {
+                background-color: var(--plate-incorrect-color);
+            }
+        }
+    }
+}
+// .tiles {
+//     gap: 1rem;
+//     grid-auto-rows: minmax(100px, auto);
+// }
+// .tile:before {
+//     content: "Drop here";
+//     display: flex;
+//     height: 100%;
+//     justify-content: center;
+//     align-items: center;
+//     box-sizing: border-box;
+//     color: var(--tui-base-04);
+//     border-radius: var(--tui-radius-l);
+//     border: 2px dashed var(--tui-base-03);
+// }
+// .content {
+//     height: 100%;
+//     padding: 1rem;
+//     background: var(--tui-base-01);
+//     box-sizing: border-box;
+//     border-radius: var(--tui-radius-l);
+//     border: 1px solid var(--tui-base-03);
+//     overflow: hidden;
+
+//     tui-tile._dragged & {
+//         box-shadow: var(--tui-shadow-hover);
+//     }
+// }

@@ -8,6 +8,7 @@ import {
     ChangeDetectorRef,
     DestroyRef
 } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import {
     FormArray,
     FormControl,
@@ -15,10 +16,9 @@ import {
     ReactiveFormsModule,
 } from "@angular/forms";
 import { TuiCheckboxLabeledModule } from "@taiga-ui/kit";
-import { Answer, Question } from "../../interfaces/questions";
 import { Subject } from "rxjs/internal/Subject";
+import { Answer, Question } from "../../interfaces/questions";
 import { BackendService } from "../../services/backend.service";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-multiple-choice-question-plate",
@@ -35,6 +35,9 @@ export class MultipleChoiceQuestionPlateComponent implements OnInit, OnChanges {
     public classes: string[] = [];
     public plateClass = "question-plate";
     public flag = false;
+    public form = new FormGroup({
+        answers: new FormArray([]),
+    });
 
     constructor(
         private cdr: ChangeDetectorRef,
@@ -42,19 +45,16 @@ export class MultipleChoiceQuestionPlateComponent implements OnInit, OnChanges {
         private destroy: DestroyRef
     ) {}
 
-    public form = new FormGroup({
-        answers: new FormArray([]),
-    });
     public ngOnInit(): void {
         this.form.valueChanges
         .pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(data => {
+        .subscribe((data) => {
             console.log(data);
             const temp = data.answers?.map((item, index) =>
                 item ? this.question?.answers[index] : null
             );
 
-            this.control.setValue(temp?.filter(item => item));
+            this.control.setValue(temp?.filter((item) => item));
         });
         this.changingValue
         ?.pipe(takeUntilDestroyed(this.destroy))

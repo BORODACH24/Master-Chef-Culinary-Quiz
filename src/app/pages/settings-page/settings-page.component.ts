@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, DestroyRef } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { TuiButtonModule, TuiSvgModule } from "@taiga-ui/core";
 import { TuiSliderModule, TuiToggleModule } from "@taiga-ui/kit";
 import { TopBarComponent } from "../../components/top-bar/top-bar.component";
 import { BackendService } from "../../services/backend.service";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-settings-page",

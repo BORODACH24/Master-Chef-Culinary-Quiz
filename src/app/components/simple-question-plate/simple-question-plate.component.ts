@@ -8,11 +8,11 @@ import {
     OnInit,
     DestroyRef
 } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { TuiRadioLabeledModule } from "@taiga-ui/kit";
 import { Subject } from "rxjs/internal/Subject";
 import { Answer, Question } from "../../interfaces/questions";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-simple-question-plate",
@@ -43,7 +43,7 @@ export class SimpleQuestionPlateComponent implements OnInit, OnChanges {
                 : "question-plate incorrect";
 
             const correctIndex = this.question?.answers.findIndex(
-                element => element.correct
+                (element) => element.correct
             );
             this.classes[correctIndex as number] = "question-answer correct";
             this.cdr.markForCheck();
@@ -51,7 +51,7 @@ export class SimpleQuestionPlateComponent implements OnInit, OnChanges {
     }
     public ngOnChanges(): void {
         this.classes = [];
-        this.question?.answers.forEach(element => {
+        this.question?.answers.forEach((element) => {
             this.classes.push("question-answer");
         });
         this.plateClass = "question-plate";

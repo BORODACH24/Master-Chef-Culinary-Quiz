@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
+import { AchivementsService } from "./achivements.service";
 import { AudioService } from "./audio.service";
 import { AuthService } from "./auth.service";
-import { AchivementsService } from "./achivements.service";
 import { CheckService } from "./check.service";
 
 @Injectable({
