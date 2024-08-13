@@ -23,6 +23,7 @@ import {
     TuiDialogService,
     TuiDialogSize,
     TuiScrollbarModule,
+    TuiSvgModule,
 } from "@taiga-ui/core";
 import { PolymorpheusContent } from "@tinkoff/ng-polymorpheus";
 import { Subject } from "rxjs/internal/Subject";
@@ -47,6 +48,7 @@ import { BackendService } from "../../services/backend.service";
         TuiScrollbarModule,
         TopBarComponent,
         DragAndDropQuestionPlateComponent,
+        TuiSvgModule
     ],
     templateUrl: "./game-page.component.html",
     styleUrl: "./game-page.component.scss",
@@ -59,24 +61,31 @@ export class GamePageComponent implements OnInit {
     public changingValue = new Subject<boolean>();
 
     public rounds: Round[] = [];
-    public roundIndex = 3;
+    public roundIndex = 0;
     public roundQuestions: Question[] = [];
     public form = new FormGroup({
         questions: new FormArray([]),
     });
+    public result = {
+        rightAnswers: 0,
+        image: "",
+        header: "",
+        message: "",
+    };
 
     constructor(
         @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
         private router: Router,
         private cdr: ChangeDetectorRef,
         private destroy: DestroyRef,
-        private backend: BackendService
+        private backend: BackendService,
     ) {}
 
     public ngOnInit(): void {
         this.rounds = rounds;
-        this.renderQuestions();
+        this.renderQuestions();        
     }
+
     public renderQuestions(): void {
         this.roundQuestions = rounds[this.roundIndex].questions;
         this.randomizeRound();
@@ -107,17 +116,58 @@ export class GamePageComponent implements OnInit {
             this.form.value.questions as [],
             this.roundQuestions
         );
-
-        if (a) {
-            this.showDialog(
-                this.content,
-                this.header,
-                "m",
-                `You have passed Round ${this.roundIndex + 1}`
-            );
+        this.backend.achivements.checkAchivements();
+        console.log(a);
+        
+        this.result.rightAnswers = a;
+        if (a === 5) {
+            this.backend.audio.resultSound(2)
+            this.result.image = "/images/congratulation-background-2.jpg";
+            this.result.header = `You have passed Round ${this.roundIndex + 1}`;
+            this.result.message = "Excellent! Good job.";
+        } else if (a === 0) {
+            this.backend.audio.resultSound(0)
+            this.result.image = "/images/failure-background.jpg";
+            this.result.header = `You haven't passed Round ${this.roundIndex + 1}`;
+            this.result.message = "Try one more time.";
+        } else {
+            this.backend.audio.resultSound(1)
+            this.result.image = "/images/congratulation-background-1.jpg";
+            this.result.header = `You have passed Round ${this.roundIndex + 1}`;
+            this.result.message = "Nice! Can be better?";
         }
+        
+        this.showDialog(
+            this.content,
+            this.header,
+            "m",
+            this.result.header
+        );
     }
-
+    public onButtonClick(): void{
+        this.backend.audio.buttonSound()
+    }
+    public onDialogMenuButtonClick(observer?: any) {
+        observer?.complete();
+        this.router.navigate(["main"]);
+    }
+    public onDialogRestartButtonClick(observer: any) {
+        observer.complete();
+        console.log(this.roundIndex, this.roundIndex + 1, rounds.length);
+        this.renderQuestions();
+        this.cdr.detectChanges();
+    }
+    public onDialogNextButtonClick(observer: any) {
+        observer.complete();
+        console.log(this.roundIndex, this.roundIndex + 1, rounds.length);
+        this.roundIndex++;
+        if (this.roundIndex >= rounds.length) {
+            this.roundIndex = 0;
+            console.log(this.roundIndex);
+        }
+        this.renderQuestions();
+        this.cdr.detectChanges();
+    }
     private showDialog(
         content: PolymorpheusContent<TuiDialogContext>,
         header: PolymorpheusContent,
@@ -134,20 +184,4 @@ export class GamePageComponent implements OnInit {
             .subscribe();
     }
 
-    public onDialogNextButtonClick(observer: any) {
-        observer.complete();
-        console.log(this.roundIndex, this.roundIndex + 1, rounds.length);
-        this.roundIndex++;
-        if (this.roundIndex >= rounds.length) {
-            this.roundIndex = 0;
-            console.log(this.roundIndex);
-        }
-        this.renderQuestions();
-        this.cdr.detectChanges();
-    }
-
-    public onDialogMenuButtonClick(observer?: any) {
-        observer?.complete();
-        this.router.navigate(["main"]);
-    }
 }

@@ -39,30 +39,48 @@
             } }
         </div>
     </tui-scrollbar>
-    <button type="submit" class="submit-button">Check</button>
+    <button
+        type="submit"
+        class="button submit-button"
+        (mousedown)="onButtonClick()">
+        Check
+    </button>
 </form>
 
 <ng-template #header>
     <div class="dialog-header">
-        <img alt="Cool" src="/images/congratulation-background.jpg" />
+        <img alt="Cool" [src]="result.image" />
     </div>
 </ng-template>
 <ng-template #content let-observer>
-    Take a look
-    <div class="buttons">
-        <button
-            size="m"
-            tuiButton
-            type="button"
-            (click)="onDialogNextButtonClick(observer)">
-            Next
-        </button>
-        <button
-            size="m"
-            tuiButton
-            type="button"
-            (click)="onDialogMenuButtonClick(observer)">
-            Main menu
-        </button>
+    <div class="dialog-content">
+        {{ result.message }}
+        <div class="buttons">
+            <button
+                type="button"
+                (click)="onDialogMenuButtonClick(observer)"
+                class="button dialog-button"
+                (mousedown)="onButtonClick()">
+                <tui-svg src="tuiIconMenuLarge"></tui-svg>
+                Main menu
+            </button>
+            <button
+                type="button"
+                (click)="onDialogRestartButtonClick(observer)"
+                class="button dialog-button"
+                (mousedown)="onButtonClick()">
+                <tui-svg src="tuiIconRefreshCcwLarge"></tui-svg>
+                Restart
+            </button>
+            <button
+                *ngIf="result.rightAnswers"
+                type="button"
+                (click)="onDialogNextButtonClick(observer)"
+                class="button dialog-button"
+                (mousedown)="onButtonClick()">
+                <tui-svg src="tuiIconArrowRightLarge"></tui-svg>
+                Next
+            </button>
+        </div>
     </div>
 </ng-template>

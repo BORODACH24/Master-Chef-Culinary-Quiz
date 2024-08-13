@@ -1,39 +1,50 @@
 import { Injectable } from "@angular/core";
 import { Answer, Question } from "../interfaces/questions";
+import { AchivementsService } from "./achivements.service";
+import { Achivement } from "../interfaces/achivements";
 
 @Injectable({
     providedIn: "root",
 })
 export class CheckService {
-    public correctCount = 0;
-    private roundQuestions: Question[] = [];
+    constructor(private achive: AchivementsService) {}
 
-    constructor() {}
+    public checkAnswers(answers: [], roundQuestions: Question[]): number {
+        let correctCount = 0;
+        answers.forEach((item: Answer | Answer[] | string, index: number) => {
+            const question = roundQuestions[index];
 
-    public checkAnswers(answers: [], _roundQuestions: Question[]): number {
-        this.roundQuestions = _roundQuestions;
-        answers.forEach(
-            (item: Answer | Answer[] | string, index: number) => {
-                const question = this.roundQuestions[index];
-
-                if (question.type === "multiple" && this.checkMultipleAnswer(item as Answer[], question)) {
-                    this.correctCount++;
-                } else if (question.type === "input" && this.checkInputAnswer(item.toString(), question)) {
-                    this.correctCount++
-                } else if (question.type === "drag" && this.checkDragAndDropAnswer(item as Answer[], question)) {
-                    this.correctCount++
-                }
-                this.correctCount += (item as Answer)?.correct? 1 : 0;
+            if (
+                question.type === "multiple" &&
+                this.checkMultipleAnswer(item as Answer[], question)
+            ) {
+                this.getAchive("answerMultipleQuestions5").currentCount++;
+                correctCount++;
+            } else if (
+                question.type === "input" &&
+                this.checkInputAnswer(item as string, question)
+            ) {
+                this.getAchive("answerInputQuestions5").currentCount++;
+                correctCount++;
+            } else if (
+                question.type === "drag" &&
+                this.checkDragAndDropAnswer(item as Answer[], question)
+            ) {
+                this.getAchive("answerDragAndDropQuestions5").currentCount++;
+                correctCount++;
+            } else if ((item as Answer)?.correct) {
+                this.getAchive("answerSimpleQuestions5").currentCount++;
+                correctCount++;
             }
-        );
-        return this.correctCount;
+        });
+        return correctCount;
     }
     public checkMultipleAnswer(answer: Answer[], question: Question): boolean {
         const currectAnswersNum = question.answers.filter(
-            (item) => item.correct
+            item => item.correct
         ).length;
         if (currectAnswersNum === answer?.length) {
-            return (answer as Answer[])?.every((element) => {
+            return (answer as Answer[])?.every(element => {
                 console.log(element);
 
                 return element.correct;
@@ -43,13 +54,18 @@ export class CheckService {
     }
     public checkInputAnswer(answer: string, question: Question): boolean {
         return (
-            answer?.toLowerCase() ===
-            question.answers[0].answer.toLowerCase()
+            answer?.toLowerCase() === question.answers[0].answer.toLowerCase()
         );
     }
-    public checkDragAndDropAnswer(answer: Answer[], question: Question): boolean {
-        return question.images?.every((item, index)=>{
+    public checkDragAndDropAnswer(
+        answer: Answer[],
+        question: Question
+    ): boolean {
+        return question.images?.every((item, index) => {
             return item.name === answer?.[index].answer;
         }) as boolean;
+    }
+    private getAchive(str: string): Achivement{
+        return (this.achive.achivements.get(str) as Achivement)
     }
 }

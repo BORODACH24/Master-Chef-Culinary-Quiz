@@ -1,18 +1,28 @@
 <label class="game-title">Master Chef : Culinary Quiz</label>
 <div class="menu-buttons">
-    <button class="menu-button" [routerLink]="['game']">Start</button>
-    <button class="menu-button" (click)="onAchivementsClick()">
+    <button
+        class="button menu-button"
+        (mousedown)="buttonSound()"
+        [routerLink]="['game']">
+        Start
+    </button>
+    <button
+        class="button menu-button"
+        (mousedown)="buttonSound()"
+        (click)="onAchivementsClick()">
         Achivements
     </button>
-    <button class="menu-button" [routerLink]="['settings']">Settings</button>
-    <button class="menu-button" [routerLink]="'/login'" (click)="onLogoutClick()">Logout</button>
+    <button
+        class="button menu-button"
+        (mousedown)="buttonSound()"
+        [routerLink]="['settings']">
+        Settings
+    </button>
+    <button
+        class="button menu-button"
+        (mousedown)="buttonSound()"
+        [routerLink]="'/login'"
+        (click)="onLogoutClick()">
+        Logout
+    </button>
 </div>
-<tui-push
-    *tuiPush="dialog"
-    heading="Congratilations"
-    type="Achivement"
-    class="push"
-    [timestamp]="2">
-    <tui-svg src="tuiIconCoffeeLarge" class="human"></tui-svg>
-    You have clicked Achivements Button {{ 5 }} times!
-</tui-push>

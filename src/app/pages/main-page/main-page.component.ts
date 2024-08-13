@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { BackendService } from "../../services/backend.service";
+import { achivements } from "../../../../public/acvivements";
+
 
 @Component({
     selector: "app-main-page",
@@ -12,7 +14,9 @@ import { BackendService } from "../../services/backend.service";
 })
 export class MainPageComponent implements OnInit {
     private audio = inject(BackendService).audio;
+    private achive = inject(BackendService).achivements;
     public ngOnInit(): void {
         this.audio.play();
+        this.achive.achivements = achivements
     }
 }

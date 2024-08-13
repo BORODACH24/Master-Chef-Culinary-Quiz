@@ -6,6 +6,7 @@ import { MainPageComponent } from "./pages/main-page/main-page.component";
 import { MenuPageComponent } from "./pages/menu-page/menu-page.component";
 import { RegisterPageComponent } from "./pages/register-page/register-page.component";
 import { SettingsPageComponent } from "./pages/settings-page/settings-page.component";
+import { AchivementsPageComponent } from "./pages/achivements-page/achivements-page.component";
 
 export const routes: Routes = [
     { path: "login", component: LoginPageComponent, canActivate: [authGuard] },
@@ -19,6 +20,7 @@ export const routes: Routes = [
             { path: "", component: MenuPageComponent },
             { path: "game", component: GamePageComponent },
             // { path: "game", loadComponent: ()=>import('./pages/game-page/game-page.component').then((i)=>i.GamePageComponent) },
+            { path: "achivements", component: AchivementsPageComponent },
             { path: "settings", component: SettingsPageComponent },
         ],
     },

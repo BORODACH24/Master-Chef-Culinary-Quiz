@@ -9,6 +9,7 @@ import { TuiButtonModule, TuiSvgModule } from "@taiga-ui/core";
 import { TuiPushModule } from "@taiga-ui/kit";
 import { CookieService } from "ngx-cookie-service";
 import { BackendService } from "../../services/backend.service";
+import { Achivement } from "../../interfaces/achivements";
 
 @Component({
     selector: "app-menu-page",
@@ -19,44 +20,36 @@ import { BackendService } from "../../services/backend.service";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuPageComponent {
-    public dialog = false;
-
-    private auth = inject(BackendService).auth;
-    private achivements = inject(BackendService).achivements;
     constructor(
         private cookies: CookieService,
         private router: Router,
-        // private auth: BackendService,
+        private backend: BackendService,
         private cdr: ChangeDetectorRef
     ) {}
 
     public onAchivementsClick() {
-        if (this.achivements.count < 5) {
-            this.achivements.count++;
-            if (this.achivements.count === 5) {
-                this.dialog = true;
-                setTimeout(() => {
-                    this.dialog = false;
-                    this.cdr.markForCheck();
-                }, 3000);
-            }
+        const achiveService = this.backend.achivements
+        const achive = (achiveService.achivements.get("clickAchiveButton") as Achivement)
+        if (!achive.done) {
+            achive.currentCount++;
+            achiveService.checkAchivements()
         } else {
-            console.log("achivs");
+            console.log("achives");
+            this.router.navigateByUrl("main/achivements");
         }
+    }
+
+    public buttonSound(): void {
+        this.backend.audio.buttonSound();
     }
 
     public onLogoutClick(): void {
         console.log("Logout");
 
-        this.auth.token = "";
+        this.backend.auth.token = "";
 
         this.cookies.delete("token");
         this.cookies.delete("refreshToken");
         this.cdr.markForCheck();
-        // this.router
-        //     .navigateByUrl("/login")
-        //     .then(i =>
-        //         this.router.navigateByUrl("/login").then(i => console.log(i))
-        //     );
     }
 }

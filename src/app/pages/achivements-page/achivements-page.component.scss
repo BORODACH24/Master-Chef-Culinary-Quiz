@@ -5,17 +5,11 @@
     flex-direction: column;
     flex: 1;
 }
-.settings-plate {
-    min-width: 16dvw;
+.achivement-plate {
+    min-width: 32dvw;
 
     background-color: white;
     border-radius: 24px;
 
     padding: 24px;
-}
-.volume,
-.mute {
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }

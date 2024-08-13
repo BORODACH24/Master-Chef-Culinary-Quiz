@@ -1,0 +1,8 @@
+<div>
+    <app-top-bar label="Achivements"></app-top-bar>
+    <div class="achivement-plate">
+        @for (item of achivements.values(); track $index) {
+            <label>{{ item.message }}</label>
+        }
+    </div>
+</div>

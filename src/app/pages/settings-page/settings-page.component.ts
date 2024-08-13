@@ -11,14 +11,14 @@ import { BackendService } from "../../services/backend.service";
     selector: "app-settings-page",
     standalone: true,
     imports: [
-    TuiSliderModule,
-    ReactiveFormsModule,
-    TuiButtonModule,
-    RouterModule,
-    TuiToggleModule,
-    TuiSvgModule,
-    TopBarComponent
-],
+        TuiSliderModule,
+        ReactiveFormsModule,
+        TuiButtonModule,
+        RouterModule,
+        TuiToggleModule,
+        TuiSvgModule,
+        TopBarComponent,
+    ],
     templateUrl: "./settings-page.component.html",
     styleUrl: "./settings-page.component.scss",
 })
@@ -26,42 +26,42 @@ export class SettingsPageComponent implements OnInit {
     public settingsForm = new FormGroup({
         volume: new FormControl(50),
         muted: new FormControl(false),
-        playMusic: new FormControl(true),
-        playSound: new FormControl(true),
+        withMusic: new FormControl(true),
+        withSound: new FormControl(true),
     });
 
-    private audio = inject(BackendService).audio;
-    private destroy = inject(DestroyRef);
+    constructor(private backend: BackendService, private destroy: DestroyRef) {}
 
     public ngOnInit(): void {
-        this.settingsForm.controls["volume"].setValue(this.audio.getVolume);
-        this.settingsForm.controls["muted"].setValue(!this.audio.getMuted);
-        this.settingsForm.controls["playMusic"].setValue(
-            this.audio.getPlayMusic
+        this.settingsForm.controls["volume"].setValue(this.backend.audio.getVolume);
+        this.settingsForm.controls["muted"].setValue(!this.backend.audio.getMuted);
+        this.settingsForm.controls["withMusic"].setValue(
+            this.backend.audio.getWithMusic
         );
-        this.settingsForm.controls["playSound"].setValue(
-            this.audio.getPlaySound
+        this.settingsForm.controls["withSound"].setValue(
+            this.backend.audio.getWithSound
         );
 
         this.settingsForm.controls["volume"].valueChanges
-        .pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(
-            (data) => (this.audio.setVolume = data as number)
-        );
+            .pipe(takeUntilDestroyed(this.destroy))
+            .subscribe(data => (this.backend.audio.setVolume = data as number));
         this.settingsForm.controls["muted"].valueChanges
-        .pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(
-            (data) => (this.audio.setMuted = !data as boolean)
-        );
-        this.settingsForm.controls["playMusic"].valueChanges
-        .pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(
-            (data) => (this.audio.setPlayMusic = data as boolean)
-        );
-        this.settingsForm.controls["playSound"].valueChanges
-        .pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(
-            (data) => (this.audio.setPlaySound = data as boolean)
-        );
+            .pipe(takeUntilDestroyed(this.destroy))
+            .subscribe(
+                data => (this.backend.audio.setMuted = !data as boolean)
+            );
+        this.settingsForm.controls["withMusic"].valueChanges
+            .pipe(takeUntilDestroyed(this.destroy))
+            .subscribe(
+                data => (this.backend.audio.setWithMusic = data as boolean)
+            );
+        this.settingsForm.controls["withSound"].valueChanges
+            .pipe(takeUntilDestroyed(this.destroy))
+            .subscribe(
+                data => (this.backend.audio.setWithSound = data as boolean)
+            );
+    }
+    public toggleSound(): void {
+        this.backend.audio.toggleSound();
     }
 }

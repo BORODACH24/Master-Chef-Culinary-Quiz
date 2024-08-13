@@ -1,4 +1,11 @@
 <div class="top-bar">
-    <button class="top-bar-button" type="button" (click)="buttonAction()">{{ buttonText }}</button>
-    <label class="top-bar-label">{{label}}</label>
+    <button
+        class="button top-bar-button"
+        type="button"
+        (mousedown)="buttonSound()"
+        (click)="buttonAction()">
+        <tui-svg src="tuiIconMenuLarge" *ngIf="buttonText === 'Menu'"></tui-svg>
+        {{ buttonText }}
+    </button>
+    <label class="top-bar-label">{{ label }}</label>
 </div>

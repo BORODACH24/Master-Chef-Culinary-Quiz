@@ -17,6 +17,7 @@
         <div class="mute">
             <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
             <tui-toggle
+                (click)="toggleSound()"
                 formControlName="muted"
                 size="l"
                 [showIcons]="true"></tui-toggle>
@@ -26,7 +27,8 @@
         <div class="mute">
             <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
             <tui-toggle
-                formControlName="playMusic"
+                (click)="toggleSound()"
+                formControlName="withMusic"
                 size="l"
                 [showIcons]="true"></tui-toggle>
 
@@ -36,7 +38,8 @@
         <div class="mute">
             <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
             <tui-toggle
-                formControlName="playSound"
+                (click)="toggleSound()"
+                formControlName="withSound"
                 size="l"
                 [showIcons]="true"></tui-toggle>
 
