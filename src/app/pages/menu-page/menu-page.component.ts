@@ -48,8 +48,10 @@ export class MenuPageComponent {
 
         this.backend.auth.token = "";
 
+        console.log(this.cookies);
+        
         this.cookies.delete("token");
         this.cookies.delete("refreshToken");
-        this.cdr.markForCheck();
+        // this.cdr.markForCheck();
     }
 }

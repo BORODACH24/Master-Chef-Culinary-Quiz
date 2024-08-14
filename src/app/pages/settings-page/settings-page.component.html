@@ -1,49 +1,61 @@
 <div>
     <app-top-bar label="Settings"></app-top-bar>
     <form class="settings-plate" [formGroup]="settingsForm">
-        <label>Music</label>
-        <div class="volume">
-            <tui-svg src="tuiIconVolume1Large"></tui-svg>
-            <input
-                size="m"
-                tuiSlider
-                type="range"
-                min="0"
-                max="100"
-                value="60"
-                formControlName="volume" />
-            <tui-svg src="tuiIconVolume2Large"></tui-svg>
+        <div class="section">
+            <label class="title">Difficulties</label>
+            <tui-filter
+                formControlName="filters"
+                size="s"
+                [items]="allDifficulties"
+            ></tui-filter>
         </div>
-        <div class="mute">
-            <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
-            <tui-toggle
-                (click)="toggleSound()"
-                formControlName="muted"
-                size="l"
-                [showIcons]="true"></tui-toggle>
-
-            <tui-svg src="tuiIconVolumeLarge"></tui-svg>
+        <div class="section">
+            <label class="title">Music</label>
+            <div class="volume">
+                <tui-svg src="tuiIconVolume1Large"></tui-svg>
+                <input
+                    size="m"
+                    tuiSlider
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="60"
+                    formControlName="volume" />
+                <tui-svg src="tuiIconVolume2Large"></tui-svg>
+            </div>
+            <!-- <div class="mute">
+                <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
+                <tui-toggle
+                    (click)="toggleSound()"
+                    formControlName="muted"
+                    size="l"
+                    [showIcons]="true"></tui-toggle>
+    
+                <tui-svg src="tuiIconVolumeLarge"></tui-svg>
+            </div> -->
+            <div class="mute">
+                <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
+                <tui-toggle
+                    (click)="toggleSound()"
+                    formControlName="withMusic"
+                    size="l"
+                    [showIcons]="true"></tui-toggle>
+    
+                <!-- <tui-svg src="tuiIconVolumeLarge"></tui-svg> -->
+            </div>
         </div>
-        <div class="mute">
-            <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
-            <tui-toggle
-                (click)="toggleSound()"
-                formControlName="withMusic"
-                size="l"
-                [showIcons]="true"></tui-toggle>
-
-            <tui-svg src="tuiIconVolumeLarge"></tui-svg>
-        </div>
-        <label>Sound</label>
-        <div class="mute">
-            <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
-            <tui-toggle
-                (click)="toggleSound()"
-                formControlName="withSound"
-                size="l"
-                [showIcons]="true"></tui-toggle>
-
-            <tui-svg src="tuiIconVolumeLarge"></tui-svg>
+        <div class="section">
+            <label class="title">Sound</label>
+            <div class="mute">
+                <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
+                <tui-toggle
+                    (click)="toggleSound()"
+                    formControlName="withSound"
+                    size="l"
+                    [showIcons]="true"></tui-toggle>
+    
+                <!-- <tui-svg src="tuiIconVolumeLarge"></tui-svg> -->
+            </div>
         </div>
     </form>
 </div>

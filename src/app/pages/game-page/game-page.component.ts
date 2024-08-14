@@ -35,6 +35,8 @@ import { SimpleQuestionPlateComponent } from "../../components/simple-question-p
 import { TopBarComponent } from "../../components/top-bar/top-bar.component";
 import { Question, Round } from "../../interfaces/questions";
 import { BackendService } from "../../services/backend.service";
+import { GameResult, Result } from "../../interfaces/results";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "app-game-page",
@@ -48,7 +50,7 @@ import { BackendService } from "../../services/backend.service";
         TuiScrollbarModule,
         TopBarComponent,
         DragAndDropQuestionPlateComponent,
-        TuiSvgModule
+        TuiSvgModule,
     ],
     templateUrl: "./game-page.component.html",
     styleUrl: "./game-page.component.scss",
@@ -57,6 +59,8 @@ import { BackendService } from "../../services/backend.service";
 export class GamePageComponent implements OnInit {
     @ViewChild("header", { static: true }) header: ElementRef | undefined;
     @ViewChild("content", { static: true }) content: ElementRef | undefined;
+    @ViewChild("finalHeader", { static: true }) finalHeader: ElementRef | undefined;
+    @ViewChild("finalContent", { static: true }) finalContent: ElementRef | undefined;
 
     public changingValue = new Subject<boolean>();
 
@@ -66,7 +70,13 @@ export class GamePageComponent implements OnInit {
     public form = new FormGroup({
         questions: new FormArray([]),
     });
-    public result = {
+    public gameResult: GameResult = {
+        result: 0,
+        possibleResult: 0,
+        header: "",
+    };
+    public result: Result = {
+        roundFinished: false,
         rightAnswers: 0,
         image: "",
         header: "",
@@ -78,16 +88,20 @@ export class GamePageComponent implements OnInit {
         private router: Router,
         private cdr: ChangeDetectorRef,
         private destroy: DestroyRef,
-        private backend: BackendService,
+        private backend: BackendService
     ) {}
 
     public ngOnInit(): void {
-        this.rounds = rounds;
-        this.renderQuestions();        
+        this.rounds = rounds.filter(item =>
+            this.backend.difficulties.includes(item.difficulty + 1)
+        );
+        this.renderQuestions();
     }
 
     public renderQuestions(): void {
-        this.roundQuestions = rounds[this.roundIndex].questions;
+        this.gameResult.rank = null
+        this.result.roundFinished = false;
+        this.roundQuestions = this.rounds[this.roundIndex].questions;
         this.randomizeRound();
         this.form = new FormGroup({
             questions: new FormArray([]),
@@ -111,77 +125,112 @@ export class GamePageComponent implements OnInit {
     }
 
     public onSubmit(): void {
-        this.changingValue.next(true);
-        const a = this.backend.check.checkAnswers(
-            this.form.value.questions as [],
-            this.roundQuestions
-        );
-        this.backend.achivements.checkAchivements();
-        console.log(a);
-        
-        this.result.rightAnswers = a;
-        if (a === 5) {
-            this.backend.audio.resultSound(2)
-            this.result.image = "/images/congratulation-background-2.jpg";
-            this.result.header = `You have passed Round ${this.roundIndex + 1}`;
-            this.result.message = "Excellent! Good job.";
-        } else if (a === 0) {
-            this.backend.audio.resultSound(0)
-            this.result.image = "/images/failure-background.jpg";
-            this.result.header = `You haven't passed Round ${this.roundIndex + 1}`;
-            this.result.message = "Try one more time.";
-        } else {
-            this.backend.audio.resultSound(1)
-            this.result.image = "/images/congratulation-background-1.jpg";
-            this.result.header = `You have passed Round ${this.roundIndex + 1}`;
-            this.result.message = "Nice! Can be better?";
+        if (!this.result.roundFinished) {
+            this.changingValue.next(true);
+            const count = this.backend.check.checkAnswers(
+                this.form.value.questions as [],
+                this.roundQuestions
+            );
+            this.backend.achivements.checkAchivements();
+            // console.log(count);
+
+            this.result.rightAnswers = count;
+
+            if (count === 5) {
+                this.backend.audio.resultSound(2);
+                this.result.image = "/images/result-backgroungs/congratulation-background-2.jpg";
+                this.result.header = `You've passed Round ${
+                    this.roundIndex + 1
+                }`;
+                this.result.message = "Excellent! Good job.";
+            } else if (count === 0) {
+                this.backend.audio.resultSound(0);
+                this.result.image = "/images/result-backgroungs/failure-background.jpg";
+                this.result.header = `You haven't passed Round ${
+                    this.roundIndex + 1
+                }`;
+                this.result.message = "Try one more time.";
+            } else {
+                this.backend.audio.resultSound(1);
+                this.result.image = "/images/result-backgroungs/congratulation-background-1.jpg";
+                this.result.header = `You've passed Round ${
+                    this.roundIndex + 1
+                }`;
+                this.result.message = "Nice! Can be better?";
+            }
+            this.result.roundFinished = true;
         }
-        
-        this.showDialog(
-            this.content,
-            this.header,
-            "m",
-            this.result.header
-        );
+
+        this.showDialog(this.content, this.header, "m", this.result.header);
     }
-    public onButtonClick(): void{
-        this.backend.audio.buttonSound()
+    public onButtonClick(): void {
+        this.backend.audio.buttonSound();
     }
-    public onDialogMenuButtonClick(observer?: any) {
+    public onDialogMenuButtonClick(observer?: any): void {
         observer?.complete();
         this.router.navigate(["main"]);
     }
-    public onDialogRestartButtonClick(observer: any) {
+    public onDialogRestartButtonClick(observer: any): void {
         observer.complete();
-        console.log(this.roundIndex, this.roundIndex + 1, rounds.length);
         this.renderQuestions();
         this.cdr.detectChanges();
     }
-    public onDialogNextButtonClick(observer: any) {
+    public onDialogNextButtonClick(observer: any): void {
         observer.complete();
-        console.log(this.roundIndex, this.roundIndex + 1, rounds.length);
+        this.gameResult.result +=
+            this.result.rightAnswers *
+            (this.rounds[this.roundIndex].difficulty + 1);
+        this.gameResult.possibleResult +=
+            this.roundQuestions.length *
+            (this.rounds[this.roundIndex].difficulty + 1);
         this.roundIndex++;
-        if (this.roundIndex >= rounds.length) {
-            this.roundIndex = 0;
-            console.log(this.roundIndex);
+        if (this.roundIndex < this.rounds.length) {
+            this.renderQuestions();
+            this.cdr.detectChanges();
+        } else {
+            this.finishGame();
         }
-        this.renderQuestions();
-        this.cdr.detectChanges();
+    }
+    public finishGame() {
+        this.backend.audio.resultSound(2);
+        this.gameResult.header = `Condratulations! You've finished the game.`;
+        this.result.message = `${this.gameResult.result}/${this.gameResult.possibleResult}`;
+        console.log(this.backend.ranks);
+        
+        this.backend.ranks.reduce((prev, item,)=>{
+            console.log(this.gameResult.result, item.points);
+            
+            if(!this.gameResult.rank && this.gameResult.result<item.points){
+                this.gameResult.rank = prev
+            }else if(!this.gameResult.rank && this.gameResult.result<item.points){
+                this.gameResult.rank = item
+            }
+            return item
+        })
+        this.showDialog(
+            this.finalContent,
+            this.finalHeader,
+            "m",
+            this.gameResult.header,
+            false
+        );
     }
     private showDialog(
         content: PolymorpheusContent<TuiDialogContext>,
         header: PolymorpheusContent,
         size: TuiDialogSize,
-        label: string
+        label: string,
+        closeable = true
     ): void {
         this.dialogs
             .open(content, {
                 label,
                 header,
                 size,
+                closeable,
+                dismissible: closeable
             })
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe();
     }
-
 }

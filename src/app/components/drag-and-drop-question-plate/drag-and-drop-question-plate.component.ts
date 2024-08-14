@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, DestroyRef, Input, OnInit, OnChanges } from "@angular/core";
+import {
+    ChangeDetectorRef,
+    Component,
+    DestroyRef,
+    Input,
+    OnInit,
+    OnChanges,
+} from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl } from "@angular/forms";
 import { TuiSvgModule } from "@taiga-ui/core";
@@ -43,13 +50,20 @@ export class DragAndDropQuestionPlateComponent implements OnInit, OnChanges {
                 )
                     ? "question-plate correct"
                     : "question-plate incorrect";
-                
-                this.question?.images?.forEach((item, index) => {
+
+                (this.control.value as Answer[]).forEach((item, index) => {
+                    // console.log(
+                    //     index,
+                    //     item.answer,
+                    //     this.question?.images?.[index].name
+                    // );
+
                     this.classes[index] =
-                        item.name === this.control.value?.[index].answer
+                        item.answer === this.question?.images?.[index].name
                             ? "content correct"
                             : "content incorrect";
                 });
+                // console.log(this.classes);
                 this.cdr.markForCheck();
             });
     }
@@ -65,7 +79,8 @@ export class DragAndDropQuestionPlateComponent implements OnInit, OnChanges {
     public onOrderChange(): void {
         const answer = [];
         for (const key of this.order.keys()) {
-            answer[Number(this.order.get(key))] = this.question?.answers[Number(key)];
+            answer[Number(this.order.get(key))] =
+                this.question?.answers[Number(key)];
         }
         this.control.setValue(answer);
     }

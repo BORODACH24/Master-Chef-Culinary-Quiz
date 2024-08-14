@@ -2,11 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { TopBarComponent } from "../../components/top-bar/top-bar.component";
 import { Achivement } from "../../interfaces/achivements";
 import { BackendService } from "../../services/backend.service";
+import { AchivementPlateComponent } from "../../components/achivement-plate/achivement-plate.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
     selector: "app-achivements-page",
     standalone: true,
-    imports: [TopBarComponent],
+    imports: [TopBarComponent, AchivementPlateComponent, CommonModule],
     templateUrl: "./achivements-page.component.html",
     styleUrl: "./achivements-page.component.scss",
 })

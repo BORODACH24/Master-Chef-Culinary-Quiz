@@ -6,12 +6,28 @@
     flex: 1;
 }
 .settings-plate {
-    min-width: 16dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    
+    min-width: 32dvw;
 
     background-color: white;
     border-radius: 24px;
 
     padding: 24px;
+
+    & .section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        & .title{
+            font-size: 1.6rem;
+            font-family: var(--main-font-family);
+        }
+    }
 }
 .volume,
 .mute {

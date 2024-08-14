@@ -1,4 +1,6 @@
-export const rounds = [
+import { Round } from "../src/app/interfaces/questions";
+
+export const rounds: Round[] = [
     {
         round: 0,
         difficulty: 0,
@@ -569,7 +571,7 @@ export const rounds = [
     },
     {
         round: 4,
-        difficulty: 2,
+        difficulty: 1,
         questions: [
             {
                 type: "multiple",

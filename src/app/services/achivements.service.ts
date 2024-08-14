@@ -21,13 +21,13 @@ export class AchivementsService {
         this.achivements.forEach((item, index) => {
             if (item.currentCount === item.necessaryCount && !item.done) {
                 item.done = true
-                this.showPush(item.message)
+                this.showPush(item.title)
             }
         });
     }
     private showPush(message: string): void {
         this.audio.achivementSound();
-        this.push
+        const push = this.push
             .open(message, {
                 heading: "Congratilations",
                 type: "Achivement",
@@ -35,5 +35,8 @@ export class AchivementsService {
             })
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe(data => console.log("data: " + data));
+        setTimeout(() => {
+            push.unsubscribe()
+        }, 3000);
     }
 }

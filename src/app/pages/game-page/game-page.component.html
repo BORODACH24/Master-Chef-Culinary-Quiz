@@ -84,3 +84,24 @@
         </div>
     </div>
 </ng-template>
+<ng-template #finalHeader>
+    <div class="final-dialog-header">
+        <img [src]="gameResult.rank?.sign" alt="Rank sign">
+        <label>{{gameResult.rank?.name}}</label>
+    </div>
+</ng-template>
+<ng-template #finalContent let-observer>
+    <div class="final-dialog-content">
+        {{ result.message }}
+        <div class="buttons">
+            <button
+                type="button"
+                (click)="onDialogMenuButtonClick(observer)"
+                class="button dialog-button"
+                (mousedown)="onButtonClick()">
+                <tui-svg src="tuiIconMenuLarge"></tui-svg>
+                Main menu
+            </button>
+        </div>
+    </div>
+</ng-template>

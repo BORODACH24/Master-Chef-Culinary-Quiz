@@ -1,1 +1,15 @@
-<p>achivement-plate works!</p>
+<div class="achivement-plate">
+    <div class="achivement-main">
+        <label class="achivement-title">{{ achivement?.title }}</label>
+        <label class="achivement-message">{{ achivement?.message }}</label>
+    </div>
+    <label class="achivement-count"
+        >{{ achivement?.currentCount }}/{{ achivement?.necessaryCount }}</label
+    >
+    <tui-svg
+        src="tuiIconCheckSquareLarge"
+        *ngIf="achivement?.done"></tui-svg>
+    <tui-svg
+        src="tuiIconSquareLarge"
+        *ngIf="!achivement?.done"></tui-svg>
+</div>
