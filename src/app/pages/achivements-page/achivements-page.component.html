@@ -3,7 +3,7 @@
     <div class="achivements-list">
         @for (item of achivements.values(); track $index) {
             <app-achivement-plate [achivement]="item"></app-achivement-plate>
-            <div class="divider" *ngIf="$index+1!==achivements.size"></div>
+            <div *ngIf="$index+1!==achivements.size" class="divider"></div>
         }
     </div>
 </div>

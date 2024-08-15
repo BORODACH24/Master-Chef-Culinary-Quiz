@@ -4,7 +4,7 @@
         type="button"
         (mousedown)="buttonSound()"
         (click)="buttonAction()">
-        <tui-svg src="tuiIconMenuLarge" *ngIf="buttonText === 'Menu'"></tui-svg>
+        <tui-svg *ngIf="buttonText === 'Menu'" src="tuiIconMenuLarge"></tui-svg>
         {{ buttonText }}
     </button>
     <label class="top-bar-label">{{ label }}</label>

@@ -1,10 +1,8 @@
 import { CommonModule } from "@angular/common";
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    DestroyRef,
-    inject,
+    DestroyRef
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import {
@@ -75,6 +73,14 @@ export class RegisterPageComponent {
             validators: registerValidator(),
         }
     );
+
+    constructor(
+        private readonly destroy: DestroyRef,
+        private cookies: CookieService,
+        private backend: BackendService,
+        private router: Router
+    ) {}
+
     public get formError(): TuiValidationError | null {
         return this.registerForm.errors
             ? new TuiValidationError("Passwords must match")
@@ -90,12 +96,6 @@ export class RegisterPageComponent {
         return getErrorMessage(this.registerForm.controls["password"]);
     }
 
-    private readonly destroy = inject(DestroyRef);
-    private cookies = inject(CookieService);
-    private auth = inject(BackendService).auth;
-    private cdr = inject(ChangeDetectorRef);
-    private router = inject(Router);
-
     public onFormSubmit(): void {
         if (!this.registerForm?.valid) {
             console.log("LoginForm error");
@@ -103,7 +103,7 @@ export class RegisterPageComponent {
             return;
         }
         this.isLoading = true;
-        this.auth
+        this.backend.auth
             .register(
                 this.registerForm.value.username,
                 this.registerForm.value.email,
@@ -112,11 +112,11 @@ export class RegisterPageComponent {
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe({
                 next: (data) => {
-                    console.log("Success");
-                    console.log(data);
+                    // console.log("Success");
+                    // console.log(data);
 
-                    this.auth.token = data.token ?? "default_token";
-                    this.auth.user = data;
+                    this.backend.auth.token = data.token ?? "default_token";
+                    this.backend.auth.user = data;
                     this.cookies.set("token", data.token ?? "default_token");
                     this.cookies.set(
                         "refreshToken",

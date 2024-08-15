@@ -7,9 +7,9 @@
         >{{ achivement?.currentCount }}/{{ achivement?.necessaryCount }}</label
     >
     <tui-svg
-        src="tuiIconCheckSquareLarge"
-        *ngIf="achivement?.done"></tui-svg>
+        *ngIf="achivement?.done"
+        src="tuiIconCheckSquareLarge"></tui-svg>
     <tui-svg
-        src="tuiIconSquareLarge"
-        *ngIf="!achivement?.done"></tui-svg>
+        *ngIf="!achivement?.done"
+        src="tuiIconSquareLarge"></tui-svg>
 </div>

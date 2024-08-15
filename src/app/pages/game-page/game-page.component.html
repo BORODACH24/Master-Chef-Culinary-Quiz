@@ -58,16 +58,16 @@
         <div class="buttons">
             <button
                 type="button"
-                (click)="onDialogMenuButtonClick(observer)"
                 class="button dialog-button"
+                (click)="onDialogMenuButtonClick(observer)"
                 (mousedown)="onButtonClick()">
                 <tui-svg src="tuiIconMenuLarge"></tui-svg>
                 Main menu
             </button>
             <button
                 type="button"
-                (click)="onDialogRestartButtonClick(observer)"
                 class="button dialog-button"
+                (click)="onDialogRestartButtonClick(observer)"
                 (mousedown)="onButtonClick()">
                 <tui-svg src="tuiIconRefreshCcwLarge"></tui-svg>
                 Restart
@@ -75,8 +75,8 @@
             <button
                 *ngIf="result.rightAnswers"
                 type="button"
-                (click)="onDialogNextButtonClick(observer)"
                 class="button dialog-button"
+                (click)="onDialogNextButtonClick(observer)"
                 (mousedown)="onButtonClick()">
                 <tui-svg src="tuiIconArrowRightLarge"></tui-svg>
                 Next
@@ -86,7 +86,7 @@
 </ng-template>
 <ng-template #finalHeader>
     <div class="final-dialog-header">
-        <img [src]="gameResult.rank?.sign" alt="Rank sign">
+        <img alt="Rank sign" [src]="gameResult.rank?.sign">
         <label>{{gameResult.rank?.name}}</label>
     </div>
 </ng-template>
@@ -96,8 +96,8 @@
         <div class="buttons">
             <button
                 type="button"
-                (click)="onDialogMenuButtonClick(observer)"
                 class="button dialog-button"
+                (click)="onDialogMenuButtonClick(observer)"
                 (mousedown)="onButtonClick()">
                 <tui-svg src="tuiIconMenuLarge"></tui-svg>
                 Main menu

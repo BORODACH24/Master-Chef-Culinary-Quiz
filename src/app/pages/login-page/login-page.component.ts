@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, DestroyRef, inject } from "@angular/core";
+import { Component, DestroyRef } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import {
     FormControl,
@@ -38,6 +38,13 @@ export class LoginPageComponent {
         password: new FormControl<string | null>(null, [Validators.required]),
     });
 
+    constructor(
+        private readonly destroy: DestroyRef,
+        private cookies: CookieService,
+        private backend: BackendService,
+        private router: Router
+    ) {}
+
     public get usernameError(): TuiValidationError | null {
         return getErrorMessage(this.loginForm.controls["username"]);
     }
@@ -45,26 +52,21 @@ export class LoginPageComponent {
         return getErrorMessage(this.loginForm.controls["password"]);
     }
 
-    private readonly destroy = inject(DestroyRef);
-    private cookies = inject(CookieService);
-    private auth = inject(BackendService).auth;
-    private router = inject(Router);
-
-    public onFormSubmit() {
+    public onFormSubmit(): void {
         this.isLoading = true;
         if (!this.loginForm?.valid) {
-            console.log("LoginForm error");
+            // console.log("LoginForm error");
             return;
         }
-        this.auth
+        this.backend.auth
             .login(this.loginForm.value.username, this.loginForm.value.password)
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe({
                 next: (data) => {
-                    console.log("Success");
+                    // console.log("Success");
 
-                    this.auth.token = data.token;
-                    this.auth.user = data;
+                    this.backend.auth.token = data.token;
+                    this.backend.auth.user = data;
                     this.cookies.set("token", data.token);
                     this.cookies.set("refreshToken", data.refreshToken);
                     this.router.navigateByUrl("main");

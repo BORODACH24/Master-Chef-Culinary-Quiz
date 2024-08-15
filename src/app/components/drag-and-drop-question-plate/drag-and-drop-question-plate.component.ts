@@ -3,8 +3,8 @@ import {
     Component,
     DestroyRef,
     Input,
-    OnInit,
     OnChanges,
+    OnInit,
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl } from "@angular/forms";
@@ -13,12 +13,11 @@ import { TuiTilesModule } from "@taiga-ui/kit";
 import { Subject } from "rxjs";
 import { Answer, Question } from "../../interfaces/questions";
 import { BackendService } from "../../services/backend.service";
-import { DraggablePlateComponent } from "../draggable-plate/draggable-plate.component";
 
 @Component({
     selector: "app-drag-and-drop-question-plate",
     standalone: true,
-    imports: [DraggablePlateComponent, TuiTilesModule, TuiSvgModule],
+    imports: [TuiTilesModule, TuiSvgModule],
     templateUrl: "./drag-and-drop-question-plate.component.html",
     styleUrl: "./drag-and-drop-question-plate.component.scss",
 })

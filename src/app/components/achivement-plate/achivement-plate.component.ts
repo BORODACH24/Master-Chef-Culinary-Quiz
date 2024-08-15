@@ -1,7 +1,7 @@
-import { Component, Input } from "@angular/core";
-import { Achivement } from "../../interfaces/achivements";
-import { TuiSvgModule } from "@taiga-ui/core";
 import { CommonModule } from "@angular/common";
+import { Component, Input } from "@angular/core";
+import { TuiSvgModule } from "@taiga-ui/core";
+import { Achivement } from "../../interfaces/achivements";
 
 @Component({
     selector: "app-achivement-plate",
@@ -11,5 +11,5 @@ import { CommonModule } from "@angular/common";
     styleUrl: "./achivement-plate.component.scss",
 })
 export class AchivementPlateComponent {
-    @Input() public achivement?: Achivement
+    @Input() public achivement?: Achivement;
 }

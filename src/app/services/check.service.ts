@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
+import { Achivement } from "../interfaces/achivements";
 import { Answer, Question } from "../interfaces/questions";
 import { AchivementsService } from "./achivements.service";
-import { Achivement } from "../interfaces/achivements";
 
 @Injectable({
     providedIn: "root",
@@ -41,11 +41,11 @@ export class CheckService {
     }
     public checkMultipleAnswer(answer: Answer[], question: Question): boolean {
         const currectAnswersNum = question.answers.filter(
-            item => item.correct
+            (item) => item.correct
         ).length;
         if (currectAnswersNum === answer?.length) {
-            return (answer as Answer[])?.every(element => {
-                console.log(element);
+            return (answer as Answer[])?.every((element) => {
+                // console.log(element);
 
                 return element.correct;
             });
@@ -66,6 +66,6 @@ export class CheckService {
         }) as boolean;
     }
     private getAchive(str: string): Achivement{
-        return (this.achive.achivements.get(str) as Achivement)
+        return (this.achive.achivements.get(str) as Achivement);
     }
 }

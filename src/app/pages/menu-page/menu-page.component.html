@@ -2,8 +2,8 @@
 <div class="menu-buttons">
     <button
         class="button menu-button"
-        (mousedown)="buttonSound()"
-        [routerLink]="['game']">
+        [routerLink]="['game']"
+        (mousedown)="buttonSound()">
         Start
     </button>
     <button
@@ -14,14 +14,14 @@
     </button>
     <button
         class="button menu-button"
-        (mousedown)="buttonSound()"
-        [routerLink]="['settings']">
+        [routerLink]="['settings']"
+        (mousedown)="buttonSound()">
         Settings
     </button>
     <button
         class="button menu-button"
-        (mousedown)="buttonSound()"
         [routerLink]="'/login'"
+        (mousedown)="buttonSound()"
         (click)="onLogoutClick()">
         Logout
     </button>

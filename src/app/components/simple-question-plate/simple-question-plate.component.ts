@@ -51,9 +51,7 @@ export class SimpleQuestionPlateComponent implements OnInit, OnChanges {
     }
     public ngOnChanges(): void {
         this.classes = [];
-        this.question?.answers.forEach((element) => {
-            this.classes.push("question-answer");
-        });
+        this.question?.answers.forEach(() => this.classes.push("question-answer"));
         this.plateClass = "question-plate";
         this.flag = false;
     }

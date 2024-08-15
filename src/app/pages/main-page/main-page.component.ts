@@ -1,16 +1,15 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    inject,
-    OnInit,
+    OnInit
 } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { BackendService } from "../../services/backend.service";
 import { achivements } from "../../../../public/acvivements";
 import { rounds } from "../../../../public/questions";
-import { Round } from "../../interfaces/questions";
 import { ranks } from "../../../../public/ranks";
+import { Round } from "../../interfaces/questions";
 import { Rank } from "../../interfaces/rank";
+import { BackendService } from "../../services/backend.service";
 
 @Component({
     selector: "app-main-page",

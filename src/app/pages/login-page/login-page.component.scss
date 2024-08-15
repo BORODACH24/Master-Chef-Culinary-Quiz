@@ -15,10 +15,12 @@
 
     height: 100dvh;
 
-    background-color: var(--main-background-color-1);
+    // background-color: var(--main-background-color-1);
     // background-image: url("/images/cloud-5572073_1920.png");
-    -webkit-mask-image: url("/svg/login-background-mask.svg");
-    -webkit-mask-size: cover;
+    // -webkit-mask-image: url("/svg/login-background-mask.svg");
+    // -webkit-mask-size: cover;
+    background-image: url("/images/app-login-background.png");
+    background-size: 100% 100%;
 }
 .login-form {
     display: flex;

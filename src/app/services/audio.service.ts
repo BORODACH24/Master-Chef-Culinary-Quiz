@@ -1,11 +1,12 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 @Injectable({
     providedIn: "root",
 })
 export class AudioService {
     private trackNum = 0;
-    private volume = 0.5;
+    private musicVolume = 0.5;
+    private soundVolume = 0.5;
     private muted = false;
     private withMusic = false;
     private withSound = true;
@@ -19,25 +20,27 @@ export class AudioService {
         "/music/fail.mp3",
         "/music/congratulations-1.mp3",
         "/music/congrstulations-2.mp3",
+        "/music/level-win-6416.mp3",
     ];
 
     constructor() {
-        console.log("OnInit Audio");
+        // console.log("OnInit Audio");
 
-        this.audio.addEventListener("ended", event => {
+        this.audio.addEventListener("ended", () => {
             this.trackNum++;
             if (this.trackNum > this.tracks.length) {
                 this.trackNum = 0;
             }
             this.audio.src = this.tracks[this.trackNum];
-            this.audio.addEventListener("canplaythrough", event => {
-                this.audio.play();
-            });
+            this.audio.addEventListener("canplaythrough", this.audio.play);
         });
     }
 
-    public get getVolume(): number {
-        return this.volume * 100;
+    public get getMusicVolume(): number {
+        return this.musicVolume * 100;
+    }
+    public get getSoundVolume(): number {
+        return this.soundVolume * 100;
     }
     public get getMuted(): boolean {
         return this.muted;
@@ -49,10 +52,15 @@ export class AudioService {
         return this.withSound;
     }
 
-    public set setVolume(_value: number) {
+    public set setMusicVolume(_value: number) {
         if (_value > 0 && _value < 100) {
-            this.volume = _value / 100;
-            this.audio.volume = this.volume;
+            this.musicVolume = _value / 100;
+            this.audio.volume = this.musicVolume;
+        }
+    }
+    public set setSoundVolume(_value: number) {
+        if (_value > 0 && _value < 100) {
+            this.soundVolume = _value / 100;
         }
     }
     public set setMuted(_value: boolean) {
@@ -72,51 +80,38 @@ export class AudioService {
     }
 
     public buttonSound(): void {
-        if (this.withSound) {
-            const sound = new Audio("/music/ui-button-click.mp3");
-            sound.volume = 1;
-            sound.addEventListener("canplaythrough", event => {
-                sound.play();
-            });
-        }
+        this.playSound("/music/ui-button-click.mp3");
     }
 
     public toggleSound(): void {
-        if (this.withSound) {
-            const sound = new Audio("/music/ui-toggle-click.mp3");
-            sound.volume = 1;
-            sound.addEventListener("canplaythrough", event => {
-                sound.play();
-            });
-        }
+        this.playSound("/music/ui-toggle-click.mp3");
     }
 
     public achivementSound(): void {
-        if (this.withSound) {
-            const sound = new Audio("/music/achivement-sound.mp3");
-            sound.volume = 1;
-            sound.addEventListener("canplaythrough", event => {
-                sound.play();
-            });
-        }
+        this.playSound("/music/achivement-sound.mp3");
     }
 
+    
     public resultSound(index: number): void {
         if (this.withSound) {
             const sound = new Audio(this.resultSounds[index]);
-            sound.volume = 1;
-            sound.addEventListener("canplaythrough", event => {
-                sound.play();
-            });
+            sound.volume = this.soundVolume;
+            sound.addEventListener("canplaythrough", sound.play);
         }
     }
-
+    
     public play(): void {
         if (this.withMusic) {
             this.audio.src = this.tracks[this.trackNum];
-            this.audio.addEventListener("canplaythrough", event => {
-                this.audio.play();
-            });
+            this.audio.addEventListener("canplaythrough", this.audio.play);
+        }
+    }
+    
+    private playSound(src: string): void{
+        if (this.withSound) {
+            const sound = new Audio(src);
+            sound.volume = this.soundVolume;
+            sound.addEventListener("canplaythrough", sound.play);
         }
     }
 }

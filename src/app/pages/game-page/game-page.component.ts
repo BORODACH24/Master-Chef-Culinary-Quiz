@@ -34,9 +34,8 @@ import { MultipleChoiceQuestionPlateComponent } from "../../components/multiple-
 import { SimpleQuestionPlateComponent } from "../../components/simple-question-plate/simple-question-plate.component";
 import { TopBarComponent } from "../../components/top-bar/top-bar.component";
 import { Question, Round } from "../../interfaces/questions";
-import { BackendService } from "../../services/backend.service";
 import { GameResult, Result } from "../../interfaces/results";
-import { Observable } from "rxjs";
+import { BackendService } from "../../services/backend.service";
 
 @Component({
     selector: "app-game-page",
@@ -57,10 +56,10 @@ import { Observable } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamePageComponent implements OnInit {
-    @ViewChild("header", { static: true }) header: ElementRef | undefined;
-    @ViewChild("content", { static: true }) content: ElementRef | undefined;
-    @ViewChild("finalHeader", { static: true }) finalHeader: ElementRef | undefined;
-    @ViewChild("finalContent", { static: true }) finalContent: ElementRef | undefined;
+    @ViewChild("header", { static: true }) public header: ElementRef | undefined;
+    @ViewChild("content", { static: true }) public content: ElementRef | undefined;
+    @ViewChild("finalHeader", { static: true }) public finalHeader: ElementRef | undefined;
+    @ViewChild("finalContent", { static: true }) public finalContent: ElementRef | undefined;
 
     public changingValue = new Subject<boolean>();
 
@@ -92,14 +91,17 @@ export class GamePageComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.rounds = rounds.filter(item =>
+        if (this.backend.difficulties.length === 0){
+            this.backend.difficulties.push(1);
+        }
+        this.rounds = rounds.filter((item) =>
             this.backend.difficulties.includes(item.difficulty + 1)
         );
         this.renderQuestions();
     }
 
     public renderQuestions(): void {
-        this.gameResult.rank = null
+        this.gameResult.rank = null;
         this.result.roundFinished = false;
         this.roundQuestions = this.rounds[this.roundIndex].questions;
         this.randomizeRound();
@@ -113,10 +115,10 @@ export class GamePageComponent implements OnInit {
         });
     }
 
-    public randomizeRound() {
+    public randomizeRound(): void {
         this.roundQuestions
             .sort(() => Math.random() - 0.5)
-            .forEach(item => {
+            .forEach((item) => {
                 item.answers.sort(() => Math.random() - 0.5);
                 if (item.type === "drag") {
                     item.images?.sort(() => Math.random() - 0.5);
@@ -191,22 +193,22 @@ export class GamePageComponent implements OnInit {
             this.finishGame();
         }
     }
-    public finishGame() {
-        this.backend.audio.resultSound(2);
+    private finishGame(): void {
+        this.backend.audio.resultSound(3);
         this.gameResult.header = `Condratulations! You've finished the game.`;
         this.result.message = `${this.gameResult.result}/${this.gameResult.possibleResult}`;
-        console.log(this.backend.ranks);
+        // console.log(this.backend.ranks);
         
         this.backend.ranks.reduce((prev, item,)=>{
-            console.log(this.gameResult.result, item.points);
+            // console.log(this.gameResult.result, item.points);
             
-            if(!this.gameResult.rank && this.gameResult.result<item.points){
-                this.gameResult.rank = prev
-            }else if(!this.gameResult.rank && this.gameResult.result<item.points){
-                this.gameResult.rank = item
+            if (!this.gameResult.rank && this.gameResult.result<item.points){
+                this.gameResult.rank = prev;
+            } else if (!this.gameResult.rank && this.gameResult.result === item.points){
+                this.gameResult.rank = item;
             }
-            return item
-        })
+            return item;
+        });
         this.showDialog(
             this.finalContent,
             this.finalHeader,

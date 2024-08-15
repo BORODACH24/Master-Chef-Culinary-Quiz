@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, DestroyRef } from "@angular/core";
+import { Component, DestroyRef, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
@@ -8,10 +8,9 @@ import {
     TuiSliderModule,
     TuiToggleModule,
 } from "@taiga-ui/kit";
+import { rounds } from "../../../../public/questions";
 import { TopBarComponent } from "../../components/top-bar/top-bar.component";
 import { BackendService } from "../../services/backend.service";
-import { rounds } from "../../../../public/questions";
-import { TuiHandler } from "@taiga-ui/cdk";
 
 @Component({
     selector: "app-settings-page",
@@ -30,20 +29,22 @@ import { TuiHandler } from "@taiga-ui/cdk";
     styleUrl: "./settings-page.component.scss",
 })
 export class SettingsPageComponent implements OnInit {
-    public allDifficulties: Number[] = [];
+    public allDifficulties: number[] = [];
     public settingsForm = new FormGroup({
         filters: new FormControl([]),
-        volume: new FormControl(50),
+        musicVolume: new FormControl(50),
+        soundVolume: new FormControl(50),
         muted: new FormControl(false),
         withMusic: new FormControl(true),
         withSound: new FormControl(true),
     });
-    public badgeHandler: TuiHandler<[], number> = item => 3;
-
+    
     constructor(private backend: BackendService, private destroy: DestroyRef) {}
-
+    
+    // public badgeHandler: TuiHandler<[], number> = (item) => 3;
+    
     public ngOnInit(): void {
-        console.log(rounds[rounds.length - 1]);
+        // console.log(rounds[rounds.length - 1]);
         for (
             let index = 0;
             index <= rounds[rounds.length - 1].difficulty;
@@ -54,8 +55,11 @@ export class SettingsPageComponent implements OnInit {
         this.settingsForm.controls["filters"].setValue(
             this.backend.difficulties as []
         );
-        this.settingsForm.controls["volume"].setValue(
-            this.backend.audio.getVolume
+        this.settingsForm.controls["musicVolume"].setValue(
+            this.backend.audio.getMusicVolume
+        );
+        this.settingsForm.controls["soundVolume"].setValue(
+            this.backend.audio.getSoundVolume
         );
         this.settingsForm.controls["muted"].setValue(
             !this.backend.audio.getMuted
@@ -69,24 +73,27 @@ export class SettingsPageComponent implements OnInit {
 
         this.settingsForm.controls["filters"].valueChanges
             .pipe(takeUntilDestroyed(this.destroy))
-            .subscribe(data => (this.backend.difficulties = data as Number[]));
-        this.settingsForm.controls["volume"].valueChanges
+            .subscribe((data) => (this.backend.difficulties = data as number[]));
+        this.settingsForm.controls["musicVolume"].valueChanges
             .pipe(takeUntilDestroyed(this.destroy))
-            .subscribe(data => (this.backend.audio.setVolume = data as number));
+            .subscribe((data) => (this.backend.audio.setMusicVolume = data as number));
+        this.settingsForm.controls["soundVolume"].valueChanges
+            .pipe(takeUntilDestroyed(this.destroy))
+            .subscribe((data) => (this.backend.audio.setSoundVolume = data as number));
         this.settingsForm.controls["muted"].valueChanges
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe(
-                data => (this.backend.audio.setMuted = !data as boolean)
+                (data) => (this.backend.audio.setMuted = !data as boolean)
             );
         this.settingsForm.controls["withMusic"].valueChanges
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe(
-                data => (this.backend.audio.setWithMusic = data as boolean)
+                (data) => (this.backend.audio.setWithMusic = data as boolean)
             );
         this.settingsForm.controls["withSound"].valueChanges
             .pipe(takeUntilDestroyed(this.destroy))
             .subscribe(
-                data => (this.backend.audio.setWithSound = data as boolean)
+                (data) => (this.backend.audio.setWithSound = data as boolean)
             );
     }
     public toggleSound(): void {

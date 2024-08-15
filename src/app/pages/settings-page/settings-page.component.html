@@ -6,8 +6,7 @@
             <tui-filter
                 formControlName="filters"
                 size="s"
-                [items]="allDifficulties"
-            ></tui-filter>
+                [items]="allDifficulties"></tui-filter>
         </div>
         <div class="section">
             <label class="title">Music</label>
@@ -20,7 +19,7 @@
                     min="0"
                     max="100"
                     value="60"
-                    formControlName="volume" />
+                    formControlName="musicVolume" />
                 <tui-svg src="tuiIconVolume2Large"></tui-svg>
             </div>
             <!-- <div class="mute">
@@ -36,24 +35,36 @@
             <div class="mute">
                 <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
                 <tui-toggle
-                    (click)="toggleSound()"
                     formControlName="withMusic"
                     size="l"
-                    [showIcons]="true"></tui-toggle>
-    
+                    [showIcons]="true"
+                    (click)="toggleSound()"></tui-toggle>
+
                 <!-- <tui-svg src="tuiIconVolumeLarge"></tui-svg> -->
             </div>
         </div>
         <div class="section">
             <label class="title">Sound</label>
+
+            <div class="volume">
+                <tui-svg src="tuiIconVolume1Large"></tui-svg>
+                <input
+                    size="m"
+                    tuiSlider
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="60"
+                    formControlName="soundVolume" />
+                <tui-svg src="tuiIconVolume2Large"></tui-svg>
+            </div>
             <div class="mute">
                 <tui-svg src="tuiIconVolumeXLarge"></tui-svg>
                 <tui-toggle
-                    (click)="toggleSound()"
                     formControlName="withSound"
                     size="l"
-                    [showIcons]="true"></tui-toggle>
-    
+                    [showIcons]="true"
+                    (click)="toggleSound()"></tui-toggle>
                 <!-- <tui-svg src="tuiIconVolumeLarge"></tui-svg> -->
             </div>
         </div>

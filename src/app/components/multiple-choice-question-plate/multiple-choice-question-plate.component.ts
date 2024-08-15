@@ -49,7 +49,7 @@ export class MultipleChoiceQuestionPlateComponent implements OnInit, OnChanges {
         this.form.valueChanges
         .pipe(takeUntilDestroyed(this.destroy))
         .subscribe((data) => {
-            console.log(data);
+            // console.log(data);
             const temp = data.answers?.map((item, index) =>
                 item ? this.question?.answers[index] : null
             );

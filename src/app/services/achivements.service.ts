@@ -1,9 +1,8 @@
-import { Injectable, Inject, DestroyRef } from "@angular/core";
-import { TuiPushService } from "@taiga-ui/kit";
-import { take, tap } from "rxjs";
+import { DestroyRef, Inject, Injectable } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { AudioService } from "./audio.service";
+import { TuiPushService } from "@taiga-ui/kit";
 import { Achivement } from "../interfaces/achivements";
+import { AudioService } from "./audio.service";
 
 @Injectable({
     providedIn: "root",
@@ -17,11 +16,11 @@ export class AchivementsService {
         private audio: AudioService
     ) {}
 
-    public checkAchivements() {
-        this.achivements.forEach((item, index) => {
-            if (item.currentCount === item.necessaryCount && !item.done) {
-                item.done = true
-                this.showPush(item.title)
+    public checkAchivements(): void {
+        this.achivements.forEach((item) => {
+            if (item.currentCount >= item.necessaryCount && !item.done) {
+                item.done = true;
+                this.showPush(item.title);
             }
         });
     }
@@ -34,9 +33,9 @@ export class AchivementsService {
                 icon: "tuiIconCoffeeLarge",
             })
             .pipe(takeUntilDestroyed(this.destroy))
-            .subscribe(data => console.log("data: " + data));
+            .subscribe();
         setTimeout(() => {
-            push.unsubscribe()
+            push.unsubscribe();
         }, 3000);
     }
 }

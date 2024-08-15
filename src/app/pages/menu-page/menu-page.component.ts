@@ -1,15 +1,14 @@
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
-    inject,
+    Component
 } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { TuiButtonModule, TuiSvgModule } from "@taiga-ui/core";
 import { TuiPushModule } from "@taiga-ui/kit";
 import { CookieService } from "ngx-cookie-service";
-import { BackendService } from "../../services/backend.service";
 import { Achivement } from "../../interfaces/achivements";
+import { BackendService } from "../../services/backend.service";
 
 @Component({
     selector: "app-menu-page",
@@ -27,14 +26,14 @@ export class MenuPageComponent {
         private cdr: ChangeDetectorRef
     ) {}
 
-    public onAchivementsClick() {
-        const achiveService = this.backend.achivements
-        const achive = (achiveService.achivements.get("clickAchiveButton") as Achivement)
+    public onAchivementsClick(): void {
+        const achiveService = this.backend.achivements;
+        const achive = (achiveService.achivements.get("clickAchiveButton") as Achivement);
         if (!achive.done) {
             achive.currentCount++;
-            achiveService.checkAchivements()
+            achiveService.checkAchivements();
         } else {
-            console.log("achives");
+            // console.log("achives");
             this.router.navigateByUrl("main/achivements");
         }
     }
@@ -44,11 +43,11 @@ export class MenuPageComponent {
     }
 
     public onLogoutClick(): void {
-        console.log("Logout");
+        // console.log("Logout");
 
         this.backend.auth.token = "";
 
-        console.log(this.cookies);
+        // console.log(this.cookies);
         
         this.cookies.delete("token");
         this.cookies.delete("refreshToken");

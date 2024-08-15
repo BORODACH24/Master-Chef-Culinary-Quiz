@@ -1,16 +1,22 @@
 :host {
     display: block;
-    height: 100vh;
+    height: 100dvh;
 
-    
     background-color: var(--main-background-color-2);
 }
-.background{
-    height: 100vh;
+.background {
+    height: 100%;
+    // width: 100%;
     display: flex;
 
-    background-color: var(--main-background-color-1);
+    // background-color: var(--main-background-color-1);
     // background-image: url("/images/cloud-5572073_1920.png");
-    -webkit-mask-image: url("/svg/background-mask.svg");
-    -webkit-mask-size: cover;
+    // -webkit-mask-image: url("/svg/background-mask.svg");
+    // -webkit-mask-size: cover;
+
+    background-image: url("/images/app-background.png");
+
+    // background-position: center;
+    // background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
