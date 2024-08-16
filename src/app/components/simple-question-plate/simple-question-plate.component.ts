@@ -11,7 +11,7 @@ import {
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { TuiRadioLabeledModule } from "@taiga-ui/kit";
-import { Subject } from "rxjs/internal/Subject";
+import { Subject } from "rxjs";
 import { Answer, Question } from "../../interfaces/questions";
 
 @Component({

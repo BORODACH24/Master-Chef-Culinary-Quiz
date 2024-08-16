@@ -26,7 +26,7 @@ import {
     TuiSvgModule,
 } from "@taiga-ui/core";
 import { PolymorpheusContent } from "@tinkoff/ng-polymorpheus";
-import { Subject } from "rxjs/internal/Subject";
+import { Subject } from "rxjs";
 import { rounds } from "../../../../public/questions";
 import { DragAndDropQuestionPlateComponent } from "../../components/drag-and-drop-question-plate/drag-and-drop-question-plate.component";
 import { InputQuestionPlateComponent } from "../../components/input-question-plate/input-question-plate.component";

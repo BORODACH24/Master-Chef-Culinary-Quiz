@@ -15,21 +15,21 @@
                 [control]="
                     form.controls['questions'].controls[$index]
                 "></app-simple-question-plate>
-            } @if (item.type === 'multiple') {
+            } @else if (item.type === 'multiple') {
             <app-multiple-choice-question-plate
                 [changingValue]="changingValue"
                 [question]="item"
                 [control]="
                     form.controls['questions'].controls[$index]
                 "></app-multiple-choice-question-plate>
-            } @if (item.type === 'input') {
+            } @else if (item.type === 'input') {
             <app-input-question-plate
                 [changingValue]="changingValue"
                 [question]="item"
                 [control]="
                     form.controls['questions'].controls[$index]
                 "></app-input-question-plate>
-            } @if (item.type === 'drag') {
+            } @else if (item.type === 'drag') {
             <app-drag-and-drop-question-plate
                 [changingValue]="changingValue"
                 [question]="item"
@@ -86,8 +86,8 @@
 </ng-template>
 <ng-template #finalHeader>
     <div class="final-dialog-header">
-        <img alt="Rank sign" [src]="gameResult.rank?.sign">
-        <label>{{gameResult.rank?.name}}</label>
+        <img alt="Rank sign" [src]="gameResult.rank?.sign" />
+        <label>{{ gameResult.rank?.name }}</label>
     </div>
 </ng-template>
 <ng-template #finalContent let-observer>

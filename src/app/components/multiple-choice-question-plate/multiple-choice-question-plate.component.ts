@@ -16,7 +16,7 @@ import {
     ReactiveFormsModule,
 } from "@angular/forms";
 import { TuiCheckboxLabeledModule } from "@taiga-ui/kit";
-import { Subject } from "rxjs/internal/Subject";
+import { Subject } from "rxjs";
 import { Answer, Question } from "../../interfaces/questions";
 import { BackendService } from "../../services/backend.service";
 

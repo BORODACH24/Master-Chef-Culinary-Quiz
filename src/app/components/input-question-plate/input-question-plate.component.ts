@@ -11,7 +11,7 @@ import {
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { TuiInputModule } from "@taiga-ui/kit";
-import { Subject } from "rxjs/internal/Subject";
+import { Subject } from "rxjs";
 import { Question } from "../../interfaces/questions";
 import { BackendService } from "../../services/backend.service";
 
